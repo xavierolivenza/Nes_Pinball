@@ -25,6 +25,9 @@ public:
 	p2List<PhysBody*> board;
 
 	PhysBody* sensor500points;
+	PhysBody* sensor1000points;
+	PhysBody* sensor100points;
+
 	bool sensed;
 
 	SDL_Texture* circle;
