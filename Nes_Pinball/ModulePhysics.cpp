@@ -78,7 +78,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;

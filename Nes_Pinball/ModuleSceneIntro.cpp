@@ -332,13 +332,13 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5));
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_REPEAT)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5));
 		circles.getLast()->data->listener = this;
 	}
 
@@ -408,7 +408,7 @@ update_status ModuleSceneIntro::Update()
 		ballrect.y = 342;
 		ballrect.h = 12;
 		ballrect.w = 11;
-		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f, c->data->GetRotation());
+		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f);
 		//App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		/*
 		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY())) {
