@@ -34,7 +34,8 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	sensor500points = App->physics->CreateRectangleSensor(154, 57, 13, 4);
+
 
 	//Board create
 	int Pinball_MainBoard_1_coords[74] = {
