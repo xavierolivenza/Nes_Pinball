@@ -404,10 +404,10 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		SDL_Rect ballrect;
-		ballrect.x = 101;
-		ballrect.y = 348;
-		ballrect.h = 10;
-		ballrect.w = 9;
+		ballrect.x = 94;
+		ballrect.y = 342;
+		ballrect.h = 12;
+		ballrect.w = 11;
 		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f, c->data->GetRotation());
 		//App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		/*
