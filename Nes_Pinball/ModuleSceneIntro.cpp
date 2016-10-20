@@ -322,7 +322,6 @@ update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(main_board, 0, 0);
 
-
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -342,6 +341,12 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->listener = this;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -10), true);
+	}
+
+	/*
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
@@ -386,6 +391,7 @@ update_status ModuleSceneIntro::Update()
 		};
 		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
 	}
+	*/
 
 	// Prepare for raycast ------------------------------------------------------
 	
