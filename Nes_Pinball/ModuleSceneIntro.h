@@ -25,7 +25,9 @@ public:
 	p2List<PhysBody*> board;
 
 	PhysBody* sensor100points;
-	PhysBody* sensor500points;
+	PhysBody* sensor500points1;
+	PhysBody* sensor500points2;
+	PhysBody* sensor500points3;
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
 
@@ -52,4 +54,6 @@ public:
 
 	bool newball = false;
 
+	uint points = 0;
+	uint maxpoints = 0;
 };

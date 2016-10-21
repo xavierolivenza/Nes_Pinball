@@ -6,7 +6,9 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleWindow.h"
 #include "SDL/include/SDL.h"
+#include "p2SString.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -40,9 +42,9 @@ bool ModuleSceneIntro::Start()
 
 	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
 
-	sensor500points = App->physics->CreateRectangleSensor(160, 60, 12, 4);
-	sensor500points = App->physics->CreateRectangleSensor(127, 60, 12, 4);
-	sensor500points = App->physics->CreateRectangleSensor(206, 93, 12, 4);
+	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4);
+	sensor500points2 = App->physics->CreateRectangleSensor(127, 60, 12, 4);
+	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4);
 
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
 
@@ -498,6 +500,14 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	if (points > maxpoints) {
+		maxpoints = points;
+	}
+
+	//title
+	p2SString title("Nes Pinball, Points:%i Maxpoints:%i", points, maxpoints);
+	App->window->SetTitle(title.GetString());
+
 	return UPDATE_CONTINUE;
 }
 
@@ -512,8 +522,20 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorreset || bodyB == sensorreset)
 				{
 					newball = true;
-					//circles.add(App->physics->CreateCircle(225, 390, 5.5));
-					//circles.getLast()->data->listener = this;
+				}
+				if (bodyA == sensor100points || bodyB == sensor100points)
+				{
+					points += 100;
+				}
+				if (bodyA == sensor500points1 || bodyB == sensor500points1 ||
+					bodyA == sensor500points2 || bodyB == sensor500points2 ||
+					bodyA == sensor500points3 || bodyB == sensor500points3)
+				{
+					points += 500;
+				}
+				if (bodyA == sensor1000points || bodyB == sensor1000points)
+				{
+					points += 1000;
 				}
 			}
 		}
