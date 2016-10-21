@@ -50,4 +50,6 @@ public:
 	SDL_Rect springrect_4;
 	SDL_Rect springrect_5;
 
+	bool newball = false;
+
 };

@@ -373,6 +373,13 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -10), true);
 	}
 
+	if (newball == true) {
+		circles.add(App->physics->CreateCircle(225, 390, 5.5));
+		circles.getLast()->data->listener = this;
+		newball = false;
+	}
+
+
 	/*
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -504,6 +511,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			{
 				if (bodyA == sensorreset || bodyB == sensorreset)
 				{
+					newball = true;
 					//circles.add(App->physics->CreateCircle(225, 390, 5.5));
 					//circles.getLast()->data->listener = this;
 				}
