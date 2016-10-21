@@ -40,4 +40,13 @@ public:
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+
+	int realtime = 0;
+	int currenttime = 0;
+	SDL_Rect springrect_1;
+	SDL_Rect springrect_2;
+	SDL_Rect springrect_3;
+	SDL_Rect springrect_4;
+	SDL_Rect springrect_5;
+
 };

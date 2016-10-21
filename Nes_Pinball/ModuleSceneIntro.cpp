@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "SDL/include/SDL.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -312,6 +313,27 @@ bool ModuleSceneIntro::Start()
 	};
 	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_8_Board_coords, 12));
 
+	springrect_1.x = 102;
+	springrect_1.y = 129;
+	springrect_1.h = 44;
+	springrect_1.w = 9;
+	springrect_2.x = 115;
+	springrect_2.y = 129;
+	springrect_2.h = 44;
+	springrect_2.w = 9;
+	springrect_3.x = 129;
+	springrect_3.y = 129;
+	springrect_3.h = 44;
+	springrect_3.w = 9;
+	springrect_4.x = 140;
+	springrect_4.y = 129;
+	springrect_4.h = 44;
+	springrect_4.w = 9;
+	springrect_5.x = 152;
+	springrect_5.y = 129;
+	springrect_5.h = 44;
+	springrect_5.w = 9;
+
 	return ret;
 }
 
@@ -328,11 +350,31 @@ update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(main_board, 0, 0);
 
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	realtime = SDL_GetTicks();
+
+	App->renderer->Blit(sprites, 220, 401, &springrect_1);
+
+	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
+		currenttime = realtime;
+
+		if (currenttime > 1000) {
+			App->renderer->Blit(sprites, 220, 401, &springrect_2);
+		}
+		else if (currenttime > 2000) {
+			App->renderer->Blit(sprites, 220, 401, &springrect_3);
+		}
+		else if (currenttime > 3000) {
+			App->renderer->Blit(sprites, 220, 401, &springrect_4);
+		}
+		else if (currenttime > 4000) {
+			App->renderer->Blit(sprites, 220, 401, &springrect_5);
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+	{
+		realtime = currenttime;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -353,6 +395,13 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	/*
+	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		ray_on = !ray_on;
+		ray.x = App->input->GetMouseX();
+		ray.y = App->input->GetMouseY();
+	}
+
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
