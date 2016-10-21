@@ -48,5 +48,6 @@ public:
 	SDL_Rect springrect_3;
 	SDL_Rect springrect_4;
 	SDL_Rect springrect_5;
+	int springstate = 0;
 
 };

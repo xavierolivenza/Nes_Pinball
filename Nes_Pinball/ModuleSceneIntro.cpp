@@ -334,6 +334,10 @@ bool ModuleSceneIntro::Start()
 	springrect_5.h = 44;
 	springrect_5.w = 9;
 
+	//Create initial ball
+	circles.add(App->physics->CreateCircle( 225, 390, 5.5));
+	circles.getLast()->data->listener = this;
+
 	return ret;
 }
 
@@ -354,6 +358,11 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(sprites, 220, 401, &springrect_1);
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+	{
+		realtime = currenttime;
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		currenttime = realtime;
@@ -363,21 +372,25 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (realtime > currenttime + 1000) {
             App->renderer->Blit(sprites, 220, 401, &springrect_2);
+			springstate = 1;
 		}
     	if (realtime > currenttime + 2000) {
 			App->renderer->Blit(sprites, 219, 401, &springrect_3);
+			springstate = 2;
 		}
 		if (realtime > currenttime + 3000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_4);
+			springstate = 3;
 		}
 		if (realtime > currenttime + 4000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
+			springstate = 4;
 		}
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
-		realtime = currenttime;
+		//Throw ball code
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
