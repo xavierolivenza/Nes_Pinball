@@ -46,7 +46,7 @@ bool ModuleSceneIntro::Start()
 
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
 
-	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT, 50, 4);
+	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4);
 
 	int Pinball_MainBoard_2_coords[74] = {
 		149, 293,
@@ -496,20 +496,18 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
-
 	App->audio->PlayFx(bonus_fx);
-
-	/*
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+	if (bodyA != nullptr && bodyB != nullptr) {
+		if (bodyA->body != nullptr && bodyB->body != nullptr)
+		{
+			if (bodyA->body->GetType() == b2Shape::e_circle || bodyB->body->GetType() == b2Shape::e_circle)
+			{
+				if (bodyA == sensorreset || bodyB == sensorreset)
+				{
+					//circles.add(App->physics->CreateCircle(225, 390, 5.5));
+					//circles.getLast()->data->listener = this;
+				}
+			}
+		}
 	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 }
