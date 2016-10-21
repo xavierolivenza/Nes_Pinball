@@ -321,10 +321,10 @@ bool ModuleSceneIntro::Start()
 	springrect_2.y = 129;
 	springrect_2.h = 44;
 	springrect_2.w = 9;
-	springrect_3.x = 129;
+	springrect_3.x = 127;
 	springrect_3.y = 129;
 	springrect_3.h = 44;
-	springrect_3.w = 9;
+	springrect_3.w = 10;
 	springrect_4.x = 140;
 	springrect_4.y = 129;
 	springrect_4.h = 44;
@@ -354,20 +354,23 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(sprites, 220, 401, &springrect_1);
 
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		currenttime = realtime;
+	}
 
-		if (currenttime > 1000) {
-			App->renderer->Blit(sprites, 220, 401, &springrect_2);
+	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	{
+		if (realtime > currenttime + 1000) {
+            App->renderer->Blit(sprites, 220, 401, &springrect_2);
 		}
-		else if (currenttime > 2000) {
-			App->renderer->Blit(sprites, 220, 401, &springrect_3);
+    	if (realtime > currenttime + 2000) {
+			App->renderer->Blit(sprites, 219, 401, &springrect_3);
 		}
-		else if (currenttime > 3000) {
+		if (realtime > currenttime + 3000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_4);
 		}
-		else if (currenttime > 4000) {
+		if (realtime > currenttime + 4000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
 		}
 	}
