@@ -47,6 +47,9 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 
+	PhysBody* CreateRectangleKicker(int x, int y, int width, int height);
+	PhysBody* CreateRectangleKickerPoint(int x, int y, int width, int height);
+
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
@@ -55,5 +58,9 @@ private:
 	bool debug;
 	b2World* world;
 	b2MouseJoint* mouse_joint;
+	b2RevoluteJoint* revolute_joint;
+	
 	b2Body* ground;
+	PhysBody* kicker;
+	PhysBody* kickerjoint;
 };
