@@ -27,13 +27,18 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = 0;
 	App->renderer->camera.y = 0;
 
-	main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
+	//main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 	sprites = App->textures->Load("pinball/PinballSheet.png");
 
+	//Test board
+	main_board = App->textures->Load("pinball/Pinball_Board_with_score.png");
+	
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+
+	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
 
 	sensor500points = App->physics->CreateRectangleSensor(160, 60, 12, 4);
 	sensor500points = App->physics->CreateRectangleSensor(127, 60, 12, 4);
@@ -41,49 +46,9 @@ bool ModuleSceneIntro::Start()
 
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
 
-	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
+	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT, 50, 4);
 
-	//Board create
-	int Pinball_MainBoard_1_coords[74] = {
-		50, 476,
-		4, 430,
-		4, 372,
-		18, 357,
-		10, 349,
-		10, 283,
-		3, 262,
-		3, 175,
-		19, 160,
-		19, 126,
-		4, 83,
-		4, 64,
-		9, 49,
-		18, 37,
-		30, 28,
-		38, 25,
-		127, 25,
-		141, 31,
-		151, 40,
-		160, 56,
-		163, 69,
-		163, 397,
-		150, 397,
-		150, 317,
-		139, 317,
-		139, 348,
-		132, 357,
-		146, 372,
-		146, 431,
-		100, 476,
-		100, 524,
-		167, 524,
-		167, 1,
-		1, 1,
-		1, 524,
-		50, 524,
-		50, 476
-	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MainBoard_1_coords, 72));
+	sensorstopballspace = App->physics->CreateRectangleSensor(196, 34, 5, 15);
 
 	int Pinball_MainBoard_2_coords[74] = {
 		149, 293,
@@ -370,38 +335,17 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		if (realtime > currenttime + 1000) {
+		if (realtime > currenttime + 500) {
             App->renderer->Blit(sprites, 220, 401, &springrect_2);
-			springstate = 1;
 		}
-    	if (realtime > currenttime + 2000) {
+    	if (realtime > currenttime + 1000) {
 			App->renderer->Blit(sprites, 219, 401, &springrect_3);
-			springstate = 2;
 		}
-		if (realtime > currenttime + 3000) {
+		if (realtime > currenttime + 1500) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_4);
-			springstate = 3;
 		}
-		if (realtime > currenttime + 4000) {
+		if (realtime > currenttime + 2000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
-			springstate = 4;
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
-	{
-		//Throw ball
-		if (springstate == 1) {
-			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -10), true);
-		}
-		if (springstate == 2) {
-			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -20), true);
-		}
-		if (springstate == 3) {
-			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -30), true);
-		}
-		if (springstate == 4) {
-			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -40), true);
 		}
 	}
 

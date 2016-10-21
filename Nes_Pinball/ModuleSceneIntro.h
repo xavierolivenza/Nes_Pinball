@@ -24,9 +24,11 @@ public:
 
 	p2List<PhysBody*> board;
 
+	PhysBody* sensor100points;
 	PhysBody* sensor500points;
 	PhysBody* sensor1000points;
-	PhysBody* sensor100points;
+	PhysBody* sensorreset;
+	PhysBody* sensorstopballspace;
 
 	bool sensed;
 
@@ -48,6 +50,5 @@ public:
 	SDL_Rect springrect_3;
 	SDL_Rect springrect_4;
 	SDL_Rect springrect_5;
-	int springstate = 0;
 
 };

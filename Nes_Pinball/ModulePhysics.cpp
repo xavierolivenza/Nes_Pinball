@@ -27,35 +27,74 @@ ModulePhysics::~ModulePhysics()
 bool ModulePhysics::Start()
 {
 	LOG("Creating Physics 2D environment");
-
+	
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-	// needed to create joints like mouse joint
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
-
-	// big static circle as "ground" in the middle of the screen
-	//int x = SCREEN_WIDTH / 2;
-	//int y = SCREEN_HEIGHT / 1.5f;
-	//int diameter = SCREEN_WIDTH / 2;
-	int x = 0;
-	int y = 0;
-	int diameter = 5;
-
+	
 	b2BodyDef body;
 	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+	body.position.Set(PIXEL_TO_METERS(69), PIXEL_TO_METERS(0));
 
-	b2Body* big_ball = world->CreateBody(&body);
+	b2Body* main_board = world->CreateBody(&body);
 
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
+	//Board create
+	int Pinball_MainBoard_1_coords[74] = {
+		50, 476,
+		4, 430,
+		4, 372,
+		18, 357,
+		10, 349,
+		10, 283,
+		3, 262,
+		3, 175,
+		19, 160,
+		19, 126,
+		4, 83,
+		4, 64,
+		9, 49,
+		18, 37,
+		30, 28,
+		38, 25,
+		127, 25,
+		141, 31,
+		151, 40,
+		160, 56,
+		163, 69,
+		163, 397,
+		150, 397,
+		150, 317,
+		139, 317,
+		139, 348,
+		132, 357,
+		146, 372,
+		146, 431,
+		100, 476,
+		100, 524,
+		167, 524,
+		167, 1,
+		1, 1,
+		1, 524,
+		50, 524,
+		50, 476
+	};
+
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[72 / 2];
+
+	for (uint i = 0; i < 72 / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(Pinball_MainBoard_1_coords[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(Pinball_MainBoard_1_coords[i * 2 + 1]);
+	}
+	shape.CreateLoop(p, 72 / 2);
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
-
+	main_board->CreateFixture(&fixture);
+	
 	return true;
 }
 
