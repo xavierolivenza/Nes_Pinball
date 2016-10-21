@@ -48,8 +48,6 @@ bool ModuleSceneIntro::Start()
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT, 50, 4);
 
-	sensorstopballspace = App->physics->CreateRectangleSensor(196, 34, 5, 15);
-
 	int Pinball_MainBoard_2_coords[74] = {
 		149, 293,
 		149, 72,
@@ -278,6 +276,15 @@ bool ModuleSceneIntro::Start()
 	};
 	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_8_Board_coords, 12));
 
+	int Pinball_MiniMovingBoard[10] = {
+		122, 139,
+		134, 139,
+		134, 142,
+		122, 142,
+		122, 139
+	};
+	board.add(App->physics->CreateChain(-5, 0, Pinball_MiniMovingBoard, 8));
+
 	springrect_1.x = 102;
 	springrect_1.y = 129;
 	springrect_1.h = 44;
@@ -442,17 +449,6 @@ update_status ModuleSceneIntro::Update()
 		ballrect.h = 12;
 		ballrect.w = 11;
 		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f);
-		//App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
-		/*
-		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY())) {
-			SDL_Rect ballrect;
-			ballrect.x = 101;
-			ballrect.y = 348;
-			ballrect.h = 10;
-			ballrect.w = 9;
-			App->renderer->Blit(sprites, x, y, &ballrect, 1.0f, c->data->GetRotation());
-		}
-		*/
 		c = c->next;
 	}
 

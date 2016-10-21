@@ -28,7 +28,6 @@ public:
 	PhysBody* sensor500points;
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
-	PhysBody* sensorstopballspace;
 
 	bool sensed;
 
