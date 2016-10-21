@@ -390,7 +390,19 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
-		//Throw ball code
+		//Throw ball
+		if (springstate == 1) {
+			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -10), true);
+		}
+		if (springstate == 2) {
+			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -20), true);
+		}
+		if (springstate == 3) {
+			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -30), true);
+		}
+		if (springstate == 4) {
+			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -40), true);
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
