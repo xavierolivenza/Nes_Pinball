@@ -527,33 +527,40 @@ update_status ModuleSceneIntro::Update()
 	sensornumrect.w = 15;
 	sensornumrect.x = 84;
 	sensornumrect.y = 118;
+	int y = 293;
 
 	if (sensor1triggered == false) {
-		App->renderer->Blit(sprites, 81, 293, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor2triggered == false) {
-		App->renderer->Blit(sprites, 81, 301, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor3triggered == false) {
-		App->renderer->Blit(sprites, 81, 309, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor4triggered == false) {
-		App->renderer->Blit(sprites, 81, 317, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor5triggered == false) {
-		App->renderer->Blit(sprites, 81, 325, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor6triggered == false) {
-		App->renderer->Blit(sprites, 81, 333, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 	sensornumrect.y += 8;
+	y += 8;
 	if (sensor7triggered == false) {
-		App->renderer->Blit(sprites, 81, 341, &sensornumrect);
+		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
 
 	//title
