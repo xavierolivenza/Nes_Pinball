@@ -62,6 +62,9 @@
     <ClInclude Include="p2Defs.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -96,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="ModulePhysics.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
