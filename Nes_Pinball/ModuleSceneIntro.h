@@ -67,6 +67,8 @@ public:
 
 	int realtime = 0;
 	int currenttime = 0;
+	int currenttimeexit = 0;
+	int currenttimepenguin = 0;
 	SDL_Rect springrect_1;
 	SDL_Rect springrect_2;
 	SDL_Rect springrect_3;
@@ -75,6 +77,7 @@ public:
 
 	bool newball = false;
 	bool reset = false;
+	bool firstpenguin = true;
 
 	uint points = 0;
 	uint maxpoints = 0;

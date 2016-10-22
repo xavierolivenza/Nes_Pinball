@@ -6,8 +6,6 @@
 #include "ModuleSceneIntro.h"
 #include <string.h>
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleUI::ModuleUI(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	

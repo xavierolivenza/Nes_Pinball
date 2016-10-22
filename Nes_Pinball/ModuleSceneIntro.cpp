@@ -29,11 +29,11 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = 0;
 	App->renderer->camera.y = 0;
 
-	//main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
+	main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 	sprites = App->textures->Load("pinball/PinballSheet.png");
 
 	//Test board
-	main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
+	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -344,11 +344,6 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(sprites, 220, 401, &springrect_1);
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
-	{
-		//realtime = currenttime;
-	}
-
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		currenttime = realtime;
@@ -433,7 +428,7 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	if (sensorballpassedexittriggered == true) {
-		if (realtime > currenttime + 1000) {
+		if (realtime > currenttimeexit + 1000) {
 			sensor1triggered = false;
 			sensor2triggered = false;
 			sensor3triggered = false;
@@ -652,6 +647,34 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 190, 295, &exitrect);
 	}
 
+	SDL_Rect penguinrect;
+	penguinrect.h = 14;
+	penguinrect.w = 46;
+	penguinrect.x = 95;
+	penguinrect.y = 247;
+
+	uint animationtime = 1000;
+	if (firstpenguin == true) {
+		currenttimepenguin = realtime;
+		firstpenguin = false;
+	}
+	if (realtime < currenttimepenguin + (animationtime/2)) {
+		App->renderer->Blit(sprites, 122, 146, &penguinrect);
+	}
+	penguinrect.y = 264;
+	if ((realtime >= currenttimepenguin + (animationtime/2)) && (realtime < currenttimepenguin + animationtime)) {
+		App->renderer->Blit(sprites, 121, 146, &penguinrect);
+	}
+	if (realtime >= currenttimepenguin + animationtime) {
+		firstpenguin = true;
+		//first blit of the animation
+		//needed for constant blit, if not added, 1 frame is not printed
+		penguinrect.y = 247;
+		App->renderer->Blit(sprites, 122, 146, &penguinrect);
+	}
+	
+	
+
 	//title
 	//title with score
 	/*
@@ -723,7 +746,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
-					currenttime = realtime;
+					currenttimeexit = realtime;
 					sensorballpassedexittriggered = true;
 				}
 			}
