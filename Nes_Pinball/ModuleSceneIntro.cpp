@@ -391,10 +391,18 @@ update_status ModuleSceneIntro::Update()
 
 	if ((newball == true) || (reset == true)) {
 		if ((numballs > 0) || (reset == true)) {
+			circles.getFirst()->data->body->DestroyFixture(circles.getFirst()->data->body->GetFixtureList());
 			circles.clear();
 			circles.add(App->physics->CreateCircle(225, 390, 5.5));
 			circles.getLast()->data->listener = this;
 			reset = false;
+			sensor1triggered = false;
+			sensor2triggered = false;
+			sensor3triggered = false;
+			sensor4triggered = false;
+			sensor5triggered = false;
+			sensor6triggered = false;
+			sensor7triggered = false;
 		}
 		newball = false;
 	}
@@ -562,6 +570,32 @@ update_status ModuleSceneIntro::Update()
 	if (sensor7triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+
+	SDL_Rect wallrect;
+	wallrect.h = 24;
+	wallrect.w = 13;
+	wallrect.x = 62;
+	wallrect.y = 349;
+
+	SDL_Rect exitrect;
+	exitrect.h = 7;
+	exitrect.w = 19;
+	exitrect.x = 119;
+	exitrect.y = 223;
+
+	if ((sensor1triggered == false) ||
+		(sensor2triggered == false) ||
+		(sensor3triggered == false) ||
+		(sensor4triggered == false) ||
+		(sensor5triggered == false) ||
+		(sensor6triggered == false) ||
+		(sensor7triggered == false)) {
+		App->renderer->Blit(sprites, 207, 293, &wallrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 190, 295, &exitrect);
+	}
+
 
 	//title
 	//title with score
