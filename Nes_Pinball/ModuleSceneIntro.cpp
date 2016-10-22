@@ -29,11 +29,11 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = 0;
 	App->renderer->camera.y = 0;
 
-	main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
+	//main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 	sprites = App->textures->Load("pinball/PinballSheet.png");
 
 	//Test board
-	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
+	main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -319,8 +319,10 @@ bool ModuleSceneIntro::Start()
 	circles.add(App->physics->CreateCircle( 225, 390, 5.5));
 	circles.getLast()->data->listener = this;
 
-	paddlesL.add(App->physics->CreatePaddleL(108, 430, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesR.add(App->physics->CreatePaddleR(180, 429, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesL.add(App->physics->CreatePaddleL(108, 433, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesL.add(App->physics->CreatePaddleL(109, 205, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesR.add(App->physics->CreatePaddleR(180, 434, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesR.add(App->physics->CreatePaddleR(180, 205, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
 
 	return ret;
 }
@@ -369,20 +371,20 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	//MAKES PADDLES MOVE
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveL();
 	}
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
 		App->physics->PaddleStopL();
 
 	}
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveR();
 	}
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
 		App->physics->PaddleStopR();
 
