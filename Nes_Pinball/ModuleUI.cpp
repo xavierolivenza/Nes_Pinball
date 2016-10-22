@@ -129,9 +129,9 @@ bool ModuleUI::CleanUp()
 // Update: draw background
 update_status ModuleUI::Update()
 {
-	sprintf_s(score_text, 10, "%06i", App->scene_intro->points);
-	App->ui->Blit(18, 48, font_score, score_text);
 	sprintf_s(score_text, 10, "%06i", App->scene_intro->maxpoints);
+	App->ui->Blit(18, 48, font_score, score_text);
+	sprintf_s(score_text, 10, "%06i", App->scene_intro->points);
 	App->ui->Blit(18, 96, font_score, score_text);
 	sprintf_s(score_text, 10, "%02i", App->scene_intro->numballs);
 	App->ui->Blit(49, 192, font_score, score_text);

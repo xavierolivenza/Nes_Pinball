@@ -375,9 +375,20 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -10), true);
 	}
 
-	if (newball == true) {
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		points = 0;
+		numballs = 3;
+		circles.clear();
 		circles.add(App->physics->CreateCircle(225, 390, 5.5));
 		circles.getLast()->data->listener = this;
+	}
+
+	if (newball == true) {
+		if (numballs > 0) {
+			circles.add(App->physics->CreateCircle(225, 390, 5.5));
+			circles.getLast()->data->listener = this;
+		}
 		newball = false;
 	}
 
