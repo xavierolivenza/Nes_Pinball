@@ -505,8 +505,12 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	//title
+	//title with score
+	/*
 	p2SString title("Nes Pinball, Points:%i Maxpoints:%i", points, maxpoints);
 	App->window->SetTitle(title.GetString());
+	*/
+	App->window->SetTitle("Nes Pinball (C++, SDL2.0, Box2D)");
 
 	return UPDATE_CONTINUE;
 }
