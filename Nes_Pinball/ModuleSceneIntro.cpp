@@ -47,7 +47,7 @@ bool ModuleSceneIntro::Start()
 	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6);
 	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6);
 	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6);
-
+	sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24);
 
 	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
 	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4);
@@ -341,7 +341,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
 	{
-		realtime = currenttime;
+		//realtime = currenttime;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -387,6 +387,19 @@ update_status ModuleSceneIntro::Update()
 		points = 0;
 		numballs = 3;
 		reset = true;
+	}
+
+	if (sensorballpassedexittriggered == true) {
+		if (realtime > currenttime + 1000) {
+			sensor1triggered = false;
+			sensor2triggered = false;
+			sensor3triggered = false;
+			sensor4triggered = false;
+			sensor5triggered = false;
+			sensor6triggered = false;
+			sensor7triggered = false;
+			sensorballpassedexittriggered = false;
+		}
 	}
 
 	if ((newball == true) || (reset == true)) {
@@ -596,7 +609,6 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 190, 295, &exitrect);
 	}
 
-
 	//title
 	//title with score
 	/*
@@ -665,6 +677,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor7 || bodyB == sensor7)
 				{
 					sensor7triggered = true;
+				}
+				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
+				{
+					currenttime = realtime;
+					sensorballpassedexittriggered = true;
 				}
 			}
 		}

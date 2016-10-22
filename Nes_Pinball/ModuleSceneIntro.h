@@ -31,6 +31,7 @@ public:
 	PhysBody* sensor5;
 	PhysBody* sensor6;
 	PhysBody* sensor7;
+	PhysBody* sensorballpassedexit;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
@@ -39,6 +40,7 @@ public:
 	bool sensor5triggered = false;
 	bool sensor6triggered = false;
 	bool sensor7triggered = false;
+	bool sensorballpassedexittriggered = false;
 
 	PhysBody* sensor100points;
 	PhysBody* sensor500points1;
