@@ -379,15 +379,15 @@ update_status ModuleSceneIntro::Update()
 	{
 		points = 0;
 		numballs = 3;
-		circles.clear();
-		circles.add(App->physics->CreateCircle(225, 390, 5.5));
-		circles.getLast()->data->listener = this;
+		reset = true;
 	}
 
-	if (newball == true) {
-		if (numballs > 0) {
+	if ((newball == true) || (reset == true)) {
+		if ((numballs > 0) || (reset == true)) {
+			circles.clear();
 			circles.add(App->physics->CreateCircle(225, 390, 5.5));
 			circles.getLast()->data->listener = this;
+			reset = false;
 		}
 		newball = false;
 	}

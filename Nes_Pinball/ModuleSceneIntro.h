@@ -53,6 +53,7 @@ public:
 	SDL_Rect springrect_5;
 
 	bool newball = false;
+	bool reset = false;
 
 	uint points = 0;
 	uint maxpoints = 0;
