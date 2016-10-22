@@ -96,7 +96,7 @@ bool ModulePhysics::Start()
 	fixture.shape = &shape;
 	main_board->CreateFixture(&fixture);
 
-	kickerjoint = CreateRectangleKickerPoint(104, 429, 2, 1);
+	/*kickerjoint = CreateRectangleKickerPoint(104, 429, 2, 1);
 	kicker = CreateRectangleKicker(104, 429, 16, 8);
 
 	b2RevoluteJointDef revolutedef;
@@ -108,6 +108,8 @@ bool ModulePhysics::Start()
 	revolutedef.collideConnected = false;
 
 	revolute_joint = (b2RevoluteJoint*)world->CreateJoint(&revolutedef);
+	*/
+
 
 	return true;
 }
@@ -129,6 +131,166 @@ update_status ModulePhysics::PreUpdate()
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
+{
+	//cirlce
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(4);
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 50;
+	//polygon
+	b2BodyDef body2;
+	body2.type = b2_dynamicBody;
+	body2.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b2 = world->CreateBody(&body2);
+
+	b2PolygonShape shape2;
+
+	int points[16] =
+	{
+		1, 8,
+		1, 4,
+		3, 2,
+		28, 2,
+		28, 4,
+		11, 8,
+		6, 10,
+		2, 9
+	};
+
+	b2Vec2* p = new b2Vec2[8];
+
+	for (uint i = 0; i < 8; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+	shape2.Set(p, 8);
+
+	//shape2.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(4) * 0.5f);
+	b2FixtureDef fixture2;
+	fixture2.shape = &shape2;
+	fixture2.density = 2.0f;
+
+	b2->CreateFixture(&fixture2);
+
+	PhysBody* pbody2 = new PhysBody();
+	pbody->body = b2;
+	b2->SetUserData(pbody2);
+	pbody->width = pbody->height = 0;
+	//REVOLUTION JOINT
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.bodyA = b;
+	revoluteJointDef.bodyB = b2;
+	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(0));
+	revoluteJointDef.localAnchorB.Set(PIXEL_TO_METERS(4), PIXEL_TO_METERS(6));
+	revoluteJointDef.referenceAngle = 0;
+	revoluteJointDef.collideConnected = false;
+	revoluteJointDef.enableMotor = false;
+	revoluteJointDef.maxMotorTorque = 500;
+	revoluteJointDef.motorSpeed = -1000 * DEGTORAD;
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.lowerAngle = angu;
+	revoluteJointDef.upperAngle = angd;
+	//paddles = (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
+	paddleList.add((b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef));
+	return pbody;
+}
+PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
+{
+	//cirlce
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(4);
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 50;
+	//polygon
+	b2BodyDef body2;
+	body2.type = b2_dynamicBody;
+	body2.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b2 = world->CreateBody(&body2);
+
+	b2PolygonShape shape2;
+
+	int points[14] =
+	{
+		1, 2,
+		27, 2,
+		29, 4,
+		29, 8,
+		27, 10,
+		21, 10,
+		1, 3
+	};
+
+	b2Vec2* p = new b2Vec2[7];
+
+	for (uint i = 0; i < 7; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+	shape2.Set(p, 7);
+
+	//shape2.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(4) * 0.5f);
+	b2FixtureDef fixture2;
+	fixture2.shape = &shape2;
+	fixture2.density = 2.0f;
+
+	b2->CreateFixture(&fixture2);
+
+	PhysBody* pbody2 = new PhysBody();
+	pbody->body = b2;
+	b2->SetUserData(pbody2);
+	pbody->width = pbody->height = 0;
+	//REVOLUTION JOINT
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.bodyA = b;
+	revoluteJointDef.bodyB = b2;
+	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(0));
+	revoluteJointDef.localAnchorB.Set(PIXEL_TO_METERS(25), PIXEL_TO_METERS(6));
+	revoluteJointDef.referenceAngle = -120 * DEGTORAD;
+	revoluteJointDef.collideConnected = false;
+	revoluteJointDef.enableMotor = false;
+	revoluteJointDef.maxMotorTorque = 500;
+	revoluteJointDef.motorSpeed = 1000 * DEGTORAD;
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.lowerAngle = angu;
+	revoluteJointDef.upperAngle = angd;
+	//paddles = (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
+	paddleListR.add((b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef));
+	return pbody;
 }
 
 PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius)
@@ -180,6 +342,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	return pbody;
 }
 
+/*
 PhysBody* ModulePhysics::CreateRectangleKicker(int x, int y, int width, int height)
 {
 	b2BodyDef body;
@@ -205,6 +368,7 @@ PhysBody* ModulePhysics::CreateRectangleKicker(int x, int y, int width, int heig
 	return pbody;
 }
 
+
 PhysBody* ModulePhysics::CreateRectangleKickerPoint(int x, int y, int width, int height)
 {
 	b2BodyDef body;
@@ -229,6 +393,7 @@ PhysBody* ModulePhysics::CreateRectangleKickerPoint(int x, int y, int width, int
 
 	return pbody;
 }
+*/
 
 PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
 {

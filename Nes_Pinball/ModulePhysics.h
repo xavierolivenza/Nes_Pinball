@@ -47,8 +47,12 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 
-	PhysBody* CreateRectangleKicker(int x, int y, int width, int height);
-	PhysBody* CreateRectangleKickerPoint(int x, int y, int width, int height);
+	//PhysBody* CreateRectangleKicker(int x, int y, int width, int height);
+	//PhysBody* CreateRectangleKickerPoint(int x, int y, int width, int height);
+
+	PhysBody* CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
+	PhysBody* CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
+
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
@@ -61,6 +65,9 @@ private:
 	b2RevoluteJoint* revolute_joint;
 	
 	b2Body* ground;
-	PhysBody* kicker;
-	PhysBody* kickerjoint;
+	//PhysBody* kicker;
+	//PhysBody* kickerjoint;
+
+	p2List<b2RevoluteJoint*> paddleList;
+	p2List<b2RevoluteJoint*> paddleListR;
 };
