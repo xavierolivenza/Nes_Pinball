@@ -378,7 +378,6 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
 		App->physics->PaddleStopL();
-
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
@@ -387,8 +386,27 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
 		App->physics->PaddleStopR();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		App->physics->PaddleMoveL();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		App->physics->PaddleStopL();
 
 	}
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	{
+		App->physics->PaddleMoveR();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+	{
+		App->physics->PaddleStopR();
+
+	}
+	//END PADDLES MOVES
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
