@@ -24,6 +24,22 @@ public:
 
 	p2List<PhysBody*> board;
 
+	PhysBody* sensor1;
+	PhysBody* sensor2;
+	PhysBody* sensor3;
+	PhysBody* sensor4;
+	PhysBody* sensor5;
+	PhysBody* sensor6;
+	PhysBody* sensor7;
+
+	bool sensor1triggered = false;
+	bool sensor2triggered = false;
+	bool sensor3triggered = false;
+	bool sensor4triggered = false;
+	bool sensor5triggered = false;
+	bool sensor6triggered = false;
+	bool sensor7triggered = false;
+
 	PhysBody* sensor100points;
 	PhysBody* sensor500points1;
 	PhysBody* sensor500points2;

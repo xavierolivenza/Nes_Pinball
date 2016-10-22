@@ -29,23 +29,30 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = 0;
 	App->renderer->camera.y = 0;
 
-	//main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
+	main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 	sprites = App->textures->Load("pinball/PinballSheet.png");
 
 	//Test board
-	main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
+	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
+	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6);
+	sensor2 = App->physics->CreateRectangleSensor(82, 304, 2, 6);
+	sensor3 = App->physics->CreateRectangleSensor(82, 312, 2, 6);
+	sensor4 = App->physics->CreateRectangleSensor(82, 321, 2, 6);
+	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6);
+	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6);
+	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6);
 
+
+	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
 	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4);
 	sensor500points2 = App->physics->CreateRectangleSensor(127, 60, 12, 4);
 	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4);
-
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4);
@@ -515,6 +522,40 @@ update_status ModuleSceneIntro::Update()
 		maxpoints = points;
 	}
 
+	SDL_Rect sensornumrect;
+	sensornumrect.h = 7;
+	sensornumrect.w = 15;
+	sensornumrect.x = 84;
+	sensornumrect.y = 118;
+
+	if (sensor1triggered == false) {
+		App->renderer->Blit(sprites, 81, 293, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor2triggered == false) {
+		App->renderer->Blit(sprites, 81, 301, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor3triggered == false) {
+		App->renderer->Blit(sprites, 81, 309, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor4triggered == false) {
+		App->renderer->Blit(sprites, 81, 317, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor5triggered == false) {
+		App->renderer->Blit(sprites, 81, 325, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor6triggered == false) {
+		App->renderer->Blit(sprites, 81, 333, &sensornumrect);
+	}
+	sensornumrect.y += 8;
+	if (sensor7triggered == false) {
+		App->renderer->Blit(sprites, 81, 341, &sensornumrect);
+	}
+
 	//title
 	//title with score
 	/*
@@ -555,6 +596,34 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor1000points || bodyB == sensor1000points)
 				{
 					points += 1000;
+				}
+				if (bodyA == sensor1 || bodyB == sensor1)
+				{
+					sensor1triggered = true;
+				}
+				if (bodyA == sensor2 || bodyB == sensor2)
+				{
+					sensor2triggered = true;
+				}
+				if (bodyA == sensor3 || bodyB == sensor3)
+				{
+					sensor3triggered = true;
+				}
+				if (bodyA == sensor4 || bodyB == sensor4)
+				{
+					sensor4triggered = true;
+				}
+				if (bodyA == sensor5 || bodyB == sensor5)
+				{
+					sensor5triggered = true;
+				}
+				if (bodyA == sensor6 || bodyB == sensor6)
+				{
+					sensor6triggered = true;
+				}
+				if (bodyA == sensor7 || bodyB == sensor7)
+				{
+					sensor7triggered = true;
 				}
 			}
 		}
