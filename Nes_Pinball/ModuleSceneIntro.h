@@ -56,4 +56,5 @@ public:
 
 	uint points = 0;
 	uint maxpoints = 0;
+	int numballs = 3;
 };

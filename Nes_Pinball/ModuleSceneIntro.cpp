@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 	sprites = App->textures->Load("pinball/PinballSheet.png");
 
 	//Test board
-	main_board = App->textures->Load("pinball/Pinball_Board_with_score.png");
+	main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -522,6 +522,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorreset || bodyB == sensorreset)
 				{
 					newball = true;
+					numballs -= 1;
+					if (numballs < 0) {
+						numballs = 0;
+					}
 				}
 				if (bodyA == sensor100points || bodyB == sensor100points)
 				{

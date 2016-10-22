@@ -130,9 +130,11 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	sprintf_s(score_text, 10, "%06i", App->scene_intro->points);
-	App->ui->Blit(32, 9, font_score, score_text);
+	App->ui->Blit(18, 48, font_score, score_text);
 	sprintf_s(score_text, 10, "%06i", App->scene_intro->maxpoints);
-	App->ui->Blit(90, 9, font_score, score_text);
+	App->ui->Blit(18, 96, font_score, score_text);
+	sprintf_s(score_text, 10, "%02i", App->scene_intro->numballs);
+	App->ui->Blit(49, 192, font_score, score_text);
 
 	return UPDATE_CONTINUE;
 }
