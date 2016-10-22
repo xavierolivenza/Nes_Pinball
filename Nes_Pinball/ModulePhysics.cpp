@@ -133,6 +133,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
+//PADDLE L
 PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
 {
 	//cirlce
@@ -213,6 +214,33 @@ PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uin
 	paddleList.add((b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef));
 	return pbody;
 }
+
+//MOVE PADDLE L
+void ModulePhysics::PaddleMoveL()
+{
+	//p2List_item<PhysBody*>*temp = App->scene_intro->paddles.getFirst()->data->body->GetJointList;
+	p2List_item<b2RevoluteJoint*> *temp = paddleList.getFirst();
+	while (temp != nullptr)
+	{
+		temp->data->EnableMotor(true);
+		temp = temp->next;
+	}
+	//paddles->EnableMotor(true);
+
+}
+
+//STOP PADDLE L
+void ModulePhysics::PaddleStopL()
+{
+	p2List_item<b2RevoluteJoint*> *temp = paddleList.getFirst();
+	while (temp != nullptr)
+	{
+		temp->data->EnableMotor(false);
+		temp = temp->next;
+	}
+}
+
+//PADDLE R
 PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
 {
 	//cirlce
@@ -291,6 +319,31 @@ PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uin
 	//paddles = (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
 	paddleListR.add((b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef));
 	return pbody;
+}
+
+//MOVE PADDLE R
+void ModulePhysics::PaddleMoveR()
+{
+	//p2List_item<PhysBody*>*temp = App->scene_intro->paddles.getFirst()->data->body->GetJointList;
+	p2List_item<b2RevoluteJoint*> *temp = paddleListR.getFirst();
+	while (temp != nullptr)
+	{
+		temp->data->EnableMotor(true);
+		temp = temp->next;
+	}
+	//paddles->EnableMotor(true);
+
+}
+
+//STOP PADDLE R
+void ModulePhysics::PaddleStopR()
+{
+	p2List_item<b2RevoluteJoint*> *temp = paddleListR.getFirst();
+	while (temp != nullptr)
+	{
+		temp->data->EnableMotor(false);
+		temp = temp->next;
+	}
 }
 
 PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius)

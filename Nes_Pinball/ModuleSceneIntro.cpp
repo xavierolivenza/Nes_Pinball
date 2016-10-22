@@ -319,6 +319,9 @@ bool ModuleSceneIntro::Start()
 	circles.add(App->physics->CreateCircle( 225, 390, 5.5));
 	circles.getLast()->data->listener = this;
 
+	paddlesL.add(App->physics->CreatePaddleL(108, 430, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesR.add(App->physics->CreatePaddleR(180, 429, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+
 	return ret;
 }
 
@@ -363,6 +366,26 @@ update_status ModuleSceneIntro::Update()
 		if (realtime > currenttime + 2000) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
 		}
+	}
+
+	//MAKES PADDLES MOVE
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		App->physics->PaddleMoveL();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		App->physics->PaddleStopL();
+
+	}
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	{
+		App->physics->PaddleMoveR();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+	{
+		App->physics->PaddleStopR();
+
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)

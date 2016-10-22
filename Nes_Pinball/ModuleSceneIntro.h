@@ -49,6 +49,9 @@ public:
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
 
+	p2List<PhysBody*> paddlesL;
+	p2List<PhysBody*> paddlesR;
+
 	bool sensed;
 
 	SDL_Texture* circle;

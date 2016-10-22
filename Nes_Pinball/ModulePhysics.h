@@ -57,6 +57,11 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+	void PaddleMoveL();
+	void PaddleStopL();
+	void PaddleMoveR();
+	void PaddleStopR();
+
 private:
 
 	bool debug;
