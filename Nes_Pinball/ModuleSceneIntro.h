@@ -24,6 +24,9 @@ public:
 
 	p2List<PhysBody*> board;
 
+	PhysBody* wall;
+	PhysBody* godball;
+
 	PhysBody* sensor1;
 	PhysBody* sensor2;
 	PhysBody* sensor3;

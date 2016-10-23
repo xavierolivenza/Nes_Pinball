@@ -40,6 +40,10 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
+	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
+	godball = App->physics->CreateCircle(144, 446, 9, b2_staticBody);
+	godball->body->SetActive(false);
+
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6);
 	sensor2 = App->physics->CreateRectangleSensor(82, 304, 2, 6);
 	sensor3 = App->physics->CreateRectangleSensor(82, 312, 2, 6);
@@ -322,7 +326,7 @@ bool ModuleSceneIntro::Start()
 	springrect_5.w = 9;
 
 	//Create initial ball
-	circles.add(App->physics->CreateCircle( 225, 390, 5.5));
+	circles.add(App->physics->CreateCircle( 225, 390, 5.5, b2_dynamicBody));
 	circles.getLast()->data->listener = this;
 
 	paddlesL.add(App->physics->CreatePaddleL(108, 433, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
@@ -411,13 +415,13 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_REPEAT)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
 		circles.getLast()->data->listener = this;
 	}
 
@@ -443,6 +447,7 @@ update_status ModuleSceneIntro::Update()
 			sensor6triggered = false;
 			sensor7triggered = false;
 			sensorballpassedexittriggered = false;
+			wall->body->SetActive(true);
 		}
 	}
 
@@ -450,7 +455,7 @@ update_status ModuleSceneIntro::Update()
 		if ((numballs > 0) || (reset == true)) {
 			circles.getFirst()->data->body->DestroyFixture(circles.getFirst()->data->body->GetFixtureList());
 			circles.clear();
-			circles.add(App->physics->CreateCircle(225, 390, 5.5));
+			circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
 			circles.getLast()->data->listener = this;
 			reset = false;
 			sensor1triggered = false;
@@ -460,6 +465,7 @@ update_status ModuleSceneIntro::Update()
 			sensor5triggered = false;
 			sensor6triggered = false;
 			sensor7triggered = false;
+			wall->body->SetActive(true);
 			sensorcard10triggered = false;
 			sensorcardJtriggered = false;
 			sensorcardQtriggered = false;
@@ -467,6 +473,7 @@ update_status ModuleSceneIntro::Update()
 			sensorcardAtriggered = false;
 			cardstriggered = false;
 			orangemaploaded = false;
+			godball->body->SetActive(false);
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 		}
 		newball = false;
@@ -601,6 +608,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else {
 		App->renderer->Blit(sprites, 190, 295, &exitrect);
+		wall->body->SetActive(false);
 	}
 
 	SDL_Rect penguinrect;
@@ -687,6 +695,7 @@ update_status ModuleSceneIntro::Update()
 	if (cardstriggered == true) {
 		if (orangemaploaded == false) {
 			main_board = App->textures->Load("pinball/Pinball_Main_Board_Orange.png");
+			godball->body->SetActive(true);
 			orangemaploaded = true;
 		}
 	}

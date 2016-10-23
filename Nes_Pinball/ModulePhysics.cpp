@@ -346,10 +346,10 @@ void ModulePhysics::PaddleStopR()
 	}
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius)
+PhysBody* ModulePhysics::CreateCircle(float x, float y, float radius, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -370,10 +370,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(float x, float y, float width, float height, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -448,7 +448,7 @@ PhysBody* ModulePhysics::CreateRectangleKickerPoint(int x, int y, int width, int
 }
 */
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangleSensor(float x, float y, float width, float height)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -475,7 +475,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
+PhysBody* ModulePhysics::CreateChain(float x, float y, int* points, float size)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
