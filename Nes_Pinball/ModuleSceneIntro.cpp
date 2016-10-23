@@ -329,10 +329,10 @@ bool ModuleSceneIntro::Start()
 	circles.add(App->physics->CreateCircle( 225, 390, 5.5, b2_dynamicBody));
 	circles.getLast()->data->listener = this;
 
-	paddlesL.add(App->physics->CreatePaddleL(108, 433, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesL.add(App->physics->CreatePaddleL(109, 205, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesR.add(App->physics->CreatePaddleR(180, 434, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesR.add(App->physics->CreatePaddleR(180, 205, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesL.add(App->physics->CreatePaddleL(108, 429, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesL.add(App->physics->CreatePaddleL(109, 204, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesR.add(App->physics->CreatePaddleR(179, 204, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
 
 	return ret;
 }
@@ -770,6 +770,8 @@ update_status ModuleSceneIntro::Update()
 	p2SString title("Nes Pinball, Points:%i Maxpoints:%i", points, maxpoints);
 	App->window->SetTitle(title.GetString());
 	*/
+
+	
 	c = paddlesL.getFirst();
 
 	while (c != NULL)
@@ -778,11 +780,11 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		SDL_Rect PaddleLrect;
-		PaddleLrect.x = 157;
-		PaddleLrect.y = 65;
-		PaddleLrect.h = 18;
-		PaddleLrect.w = 29;
-		App->renderer->Blit(sprites, x+3, y-2, &PaddleLrect, 1.0f, c->data->GetRotation(), 0, 0);
+		PaddleLrect.x = 42;
+		PaddleLrect.y = 88;
+		PaddleLrect.h = 12;
+		PaddleLrect.w = 34;
+		App->renderer->Blit(sprites, x-1, y+3, &PaddleLrect, 1.0f, c->data->GetRotation(), 0, 0);
 		c = c->next;
 	}
 
@@ -794,14 +796,14 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		SDL_Rect PaddleRrect;
-		PaddleRrect.x = 54;
-		PaddleRrect.y = 65;
-		PaddleRrect.h = 18;
-		PaddleRrect.w = 29;
-		App->renderer->Blit(sprites, x-3, y-3, &PaddleRrect, 1.0f, c->data->GetRotation(), 0, 0);
+		PaddleRrect.x = 42;
+		PaddleRrect.y = 99;
+		PaddleRrect.h = 12;
+		PaddleRrect.w = 34;
+		App->renderer->Blit(sprites, x-2, y+3, &PaddleRrect, 1.0f, c->data->GetRotation(), 0, 0);
 		c = c->next;
 	}
-
+	
 	App->window->SetTitle("Nes Pinball (C++, SDL2.0, Box2D)");
 
 	return UPDATE_CONTINUE;

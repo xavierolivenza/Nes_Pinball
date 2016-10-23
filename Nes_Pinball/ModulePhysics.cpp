@@ -144,7 +144,7 @@ PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uin
 	b2Body* b = world->CreateBody(&body);
 
 	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(4);
+	shape.m_radius = PIXEL_TO_METERS(0);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
@@ -154,7 +154,7 @@ PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uin
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	b->SetUserData(pbody);
-	pbody->width = pbody->height = 50;
+	pbody->width = pbody->height = 5;
 	//polygon
 	b2BodyDef body2;
 	body2.type = b2_dynamicBody;
@@ -166,14 +166,14 @@ PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uin
 
 	int points[16] =
 	{
-		1, 8,
-		1, 4,
-		3, 2,
-		28, 2,
-		28, 4,
-		11, 8,
-		6, 10,
-		2, 9
+		1, 10,
+		1, 6,
+		3, 3,
+		33, 6,
+		33, 8,
+		12, 11,
+		6, 12,
+		2, 11
 	};
 
 	b2Vec2* p = new b2Vec2[8];
@@ -251,7 +251,7 @@ PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uin
 	b2Body* b = world->CreateBody(&body);
 
 	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(4);
+	shape.m_radius = PIXEL_TO_METERS(0);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
@@ -273,13 +273,13 @@ PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uin
 
 	int points[14] =
 	{
-		1, 2,
-		27, 2,
+		-3, 2,
+		27, 3,
 		29, 4,
 		29, 8,
-		27, 10,
-		21, 10,
-		1, 3
+		27, 12,
+		21, 12,
+		-3, 3
 	};
 
 	b2Vec2* p = new b2Vec2[7];

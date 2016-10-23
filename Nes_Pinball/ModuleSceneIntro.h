@@ -75,8 +75,8 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 
-	SDL_Texture* paddleL;
-	SDL_Texture* paddleR;
+	//SDL_Texture* paddleL;
+	//SDL_Texture* paddleR;
 
 	SDL_Texture* main_board;
 	SDL_Texture* sprites;
