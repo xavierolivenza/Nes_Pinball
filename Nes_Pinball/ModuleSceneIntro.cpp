@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
-	godball = App->physics->CreateCircle(144, 446, 6, b2_staticBody);
+	godball = App->physics->CreateCircle(143, 446, 7, b2_staticBody);
 	godball->body->SetActive(false);
 
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6);
@@ -327,6 +327,7 @@ bool ModuleSceneIntro::Start()
 
 	//Create initial ball
 	circles.add(App->physics->CreateCircle( 225, 390, 5.5, b2_dynamicBody));
+	circles.getFirst()->data->body->SetBullet(true);
 	circles.getLast()->data->listener = this;
 
 	paddlesL.add(App->physics->CreatePaddleL(108, 429, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
@@ -427,12 +428,14 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
+		circles.getFirst()->data->body->SetBullet(true);
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_REPEAT)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
+		circles.getFirst()->data->body->SetBullet(true);
 		circles.getLast()->data->listener = this;
 	}
 
@@ -467,6 +470,7 @@ update_status ModuleSceneIntro::Update()
 			circles.getFirst()->data->body->DestroyFixture(circles.getFirst()->data->body->GetFixtureList());
 			circles.clear();
 			circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
+			circles.getFirst()->data->body->SetBullet(true);
 			circles.getLast()->data->listener = this;
 			reset = false;
 			sensor1triggered = false;
@@ -782,12 +786,10 @@ update_status ModuleSceneIntro::Update()
 	App->window->SetTitle(title.GetString());
 	*/
 
-	
 	c = paddlesL.getFirst();
 
 	while (c != NULL)
 	{
-
 		int x, y;
 		c->data->GetPosition(x, y);
 		SDL_Rect PaddleLrect;
@@ -803,7 +805,6 @@ update_status ModuleSceneIntro::Update()
 
 	while (c != NULL)
 	{
-
 		int x, y;
 		c->data->GetPosition(x, y);
 		SDL_Rect PaddleRrect;
@@ -853,30 +854,37 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor1 || bodyB == sensor1)
 				{
 					sensor1triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2( 3, 0), true);
 				}
 				if (bodyA == sensor2 || bodyB == sensor2)
 				{
 					sensor2triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor3 || bodyB == sensor3)
 				{
 					sensor3triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor4 || bodyB == sensor4)
 				{
 					sensor4triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor5 || bodyB == sensor5)
 				{
 					sensor5triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor6 || bodyB == sensor6)
 				{
 					sensor6triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor7 || bodyB == sensor7)
 				{
 					sensor7triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
