@@ -27,6 +27,8 @@ public:
 	PhysBody* wall;
 	PhysBody* godball;
 
+	bool springanimation = false;
+
 	PhysBody* sensor1;
 	PhysBody* sensor2;
 	PhysBody* sensor3;

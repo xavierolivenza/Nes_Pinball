@@ -352,22 +352,33 @@ update_status ModuleSceneIntro::Update()
 
 	realtime = SDL_GetTicks();
 
-	App->renderer->Blit(sprites, 220, 401, &springrect_1);
-
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		currenttime = realtime;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+	{
+		springanimation = false;
+	}
+
+	if (springanimation == false) {
+		App->renderer->Blit(sprites, 220, 401, &springrect_1);
+	}
+
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		if (realtime > currenttime + 500) {
+		springanimation = true;
+		if (realtime < currenttime + 500) {
+			App->renderer->Blit(sprites, 220, 401, &springrect_1);
+		}
+		if ((realtime > currenttime + 500) && (realtime < currenttime + 1000)) {
             App->renderer->Blit(sprites, 220, 401, &springrect_2);
 		}
-    	if (realtime > currenttime + 1000) {
+    	if ((realtime > currenttime + 1000) && (realtime < currenttime + 1500)) {
 			App->renderer->Blit(sprites, 219, 401, &springrect_3);
 		}
-		if (realtime > currenttime + 1500) {
+		if ((realtime > currenttime + 1500) && (realtime < currenttime + 2000)) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_4);
 		}
 		if (realtime > currenttime + 2000) {
