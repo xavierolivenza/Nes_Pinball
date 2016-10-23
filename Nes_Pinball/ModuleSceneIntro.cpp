@@ -44,28 +44,28 @@ bool ModuleSceneIntro::Start()
 	godball = App->physics->CreateCircle(143, 446, 7, b2_staticBody);
 	godball->body->SetActive(false);
 
-	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6);
-	sensor2 = App->physics->CreateRectangleSensor(82, 304, 2, 6);
-	sensor3 = App->physics->CreateRectangleSensor(82, 312, 2, 6);
-	sensor4 = App->physics->CreateRectangleSensor(82, 321, 2, 6);
-	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6);
-	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6);
-	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6);
-	sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24);
+	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6, 0);
+	sensor2 = App->physics->CreateRectangleSensor(82, 304, 2, 6, 0);
+	sensor3 = App->physics->CreateRectangleSensor(82, 312, 2, 6, 0);
+	sensor4 = App->physics->CreateRectangleSensor(82, 321, 2, 6, 0);
+	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6, 0);
+	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6, 0);
+	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6, 0);
+	sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24, 0);
 
-	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4);
-	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4);
-	sensor500points2 = App->physics->CreateRectangleSensor(127, 60, 12, 4);
-	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4);
-	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
+	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4, 172);
+	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4, 0);
+	sensor500points2 = App->physics->CreateRectangleSensor(127, 60, 12, 4, 0);
+	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4, 0);
+	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4, 0);
 
-	sensorcard10 = App->physics->CreateRectangleSensor(113, 291, 12, 4);
-	sensorcardJ = App->physics->CreateRectangleSensor(129, 291, 12, 4);
-	sensorcardQ = App->physics->CreateRectangleSensor(145, 291, 12, 4);
-	sensorcardK = App->physics->CreateRectangleSensor(161, 291, 12, 4);
-	sensorcardA = App->physics->CreateRectangleSensor(177, 291, 12, 4);
+	sensorcard10 = App->physics->CreateRectangleSensor(113, 291, 12, 4, 0);
+	sensorcardJ = App->physics->CreateRectangleSensor(129, 291, 12, 4, 0);
+	sensorcardQ = App->physics->CreateRectangleSensor(145, 291, 12, 4, 0);
+	sensorcardK = App->physics->CreateRectangleSensor(161, 291, 12, 4, 0);
+	sensorcardA = App->physics->CreateRectangleSensor(177, 291, 12, 4, 0);
 
-	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4);
+	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
 	int Pinball_MainBoard_2_coords[74] = {
 		149, 293,
@@ -854,37 +854,37 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor1 || bodyB == sensor1)
 				{
 					sensor1triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2( 3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor2 || bodyB == sensor2)
 				{
 					sensor2triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor3 || bodyB == sensor3)
 				{
 					sensor3triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor4 || bodyB == sensor4)
 				{
 					sensor4triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor5 || bodyB == sensor5)
 				{
 					sensor5triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor6 || bodyB == sensor6)
 				{
 					sensor6triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensor7 || bodyB == sensor7)
 				{
 					sensor7triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
 				}
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
