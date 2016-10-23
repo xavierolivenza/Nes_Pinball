@@ -97,7 +97,7 @@ void ModuleUI::Blit(int x, int y, int font_id, const char* text) const
 				rect.x = rect.w * (j % font->row_chars);
 				rect.y = rect.h * (j / font->row_chars);
 				App->renderer->Blit(font->graphic, x, y, &rect, 0.0f);
-				x += rect.w;
+				x = x + rect.w + 1;// +1, 1 pixel between nums
 				break;
 			}
 		}
@@ -128,11 +128,11 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	sprintf_s(score_text, 10, "%06i", App->scene_intro->maxpoints);
-	App->ui->Blit(18, 48, font_score, score_text);
+	App->ui->Blit(16, 48, font_score, score_text);
 	sprintf_s(score_text, 10, "%06i", App->scene_intro->points);
-	App->ui->Blit(18, 96, font_score, score_text);
+	App->ui->Blit(16, 96, font_score, score_text);
 	sprintf_s(score_text, 10, "%02i", App->scene_intro->numballs);
-	App->ui->Blit(49, 192, font_score, score_text);
+	App->ui->Blit(48, 192, font_score, score_text);
 
 	return UPDATE_CONTINUE;
 }
