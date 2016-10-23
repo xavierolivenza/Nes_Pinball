@@ -326,7 +326,7 @@ bool ModuleSceneIntro::Start()
 	springrect_5.w = 9;
 
 	//Create initial ball
-	circles.add(App->physics->CreateCircle( 225, 390, 5.5, b2_dynamicBody));
+	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
 	circles.getFirst()->data->body->SetBullet(true);
 	circles.getLast()->data->listener = this;
 
@@ -464,14 +464,14 @@ update_status ModuleSceneIntro::Update()
 			wall->body->SetActive(true);
 		}
 	}
-
+	circles.getLast();
 	if ((newball == true) || (reset == true)) {
 		if ((numballs > 0) || (reset == true)) {
-			circles.getFirst()->data->body->DestroyFixture(circles.getFirst()->data->body->GetFixtureList());
-			circles.clear();
-			circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
-			circles.getFirst()->data->body->SetBullet(true);
-			circles.getLast()->data->listener = this;
+
+			b2Vec2 BallInitialPos;
+			BallInitialPos.x = 4.55;
+			BallInitialPos.y = 7.8;
+			circles.getLast()->data->body->SetTransform(BallInitialPos, 0);
 			reset = false;
 			sensor1triggered = false;
 			sensor2triggered = false;
