@@ -770,6 +770,38 @@ update_status ModuleSceneIntro::Update()
 	p2SString title("Nes Pinball, Points:%i Maxpoints:%i", points, maxpoints);
 	App->window->SetTitle(title.GetString());
 	*/
+	c = paddlesL.getFirst();
+
+	while (c != NULL)
+	{
+
+		int x, y;
+		c->data->GetPosition(x, y);
+		SDL_Rect PaddleLrect;
+		PaddleLrect.x = 157;
+		PaddleLrect.y = 65;
+		PaddleLrect.h = 18;
+		PaddleLrect.w = 29;
+		App->renderer->Blit(sprites, x+3, y-2, &PaddleLrect, 1.0f, c->data->GetRotation(), 0, 0);
+		c = c->next;
+	}
+
+	c = paddlesR.getFirst();
+
+	while (c != NULL)
+	{
+
+		int x, y;
+		c->data->GetPosition(x, y);
+		SDL_Rect PaddleRrect;
+		PaddleRrect.x = 54;
+		PaddleRrect.y = 65;
+		PaddleRrect.h = 18;
+		PaddleRrect.w = 29;
+		App->renderer->Blit(sprites, x-3, y-3, &PaddleRrect, 1.0f, c->data->GetRotation(), 0, 0);
+		c = c->next;
+	}
+
 	App->window->SetTitle("Nes Pinball (C++, SDL2.0, Box2D)");
 
 	return UPDATE_CONTINUE;
