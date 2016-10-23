@@ -55,6 +55,12 @@ bool ModuleSceneIntro::Start()
 	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4);
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4);
 
+	sensorcard10 = App->physics->CreateRectangleSensor(113, 291, 12, 4);
+	sensorcardJ = App->physics->CreateRectangleSensor(129, 291, 12, 4);
+	sensorcardQ = App->physics->CreateRectangleSensor(145, 291, 12, 4);
+	sensorcardK = App->physics->CreateRectangleSensor(161, 291, 12, 4);
+	sensorcardA = App->physics->CreateRectangleSensor(177, 291, 12, 4);
+
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4);
 
 	int Pinball_MainBoard_2_coords[74] = {
@@ -228,7 +234,7 @@ bool ModuleSceneIntro::Start()
 		35, 286,
 		36, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_3_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_3_Board_coords, 12));
 
 	int Pinball_Separator_4_Board_coords[14] = {
 		52, 285,
@@ -250,7 +256,7 @@ bool ModuleSceneIntro::Start()
 		67, 286,
 		68, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_5_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_5_Board_coords, 12));
 
 	int Pinball_Separator_6_Board_coords[14] = {
 		84, 285,
@@ -261,7 +267,7 @@ bool ModuleSceneIntro::Start()
 		83, 286,
 		84, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_6_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_6_Board_coords, 12));
 
 	int Pinball_Separator_7_Board_coords[14] = {
 		100, 285,
@@ -283,7 +289,7 @@ bool ModuleSceneIntro::Start()
 		115, 286,
 		116, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_8_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_8_Board_coords, 12));
 
 	int Pinball_MiniMovingBoard[10] = {
 		122, 139,
@@ -454,6 +460,14 @@ update_status ModuleSceneIntro::Update()
 			sensor5triggered = false;
 			sensor6triggered = false;
 			sensor7triggered = false;
+			sensorcard10triggered = false;
+			sensorcardJtriggered = false;
+			sensorcardQtriggered = false;
+			sensorcardKtriggered = false;
+			sensorcardAtriggered = false;
+			cardstriggered = false;
+			orangemaploaded = false;
+			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 		}
 		newball = false;
 	}
@@ -523,64 +537,6 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		SDL_Rect ballrect;
-		ballrect.x = 94;
-		ballrect.y = 342;
-		ballrect.h = 12;
-		ballrect.w = 11;
-		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f);
-		c = c->next;
-	}
-
-	c = boxes.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		if(ray_on)
-		{
-			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if(hit >= 0)
-				ray_hit = hit;
-		}
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	// ray -----------------
-	if(ray_on == true)
-	{
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
-		destination.Normalize();
-		destination *= ray_hit;
-
-		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-		if(normal.x != 0.0f)
-			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	}
-
-	if (points > maxpoints) {
-		maxpoints = points;
-	}
-
 	SDL_Rect sensornumrect;
 	sensornumrect.h = 7;
 	sensornumrect.w = 15;
@@ -658,11 +614,11 @@ update_status ModuleSceneIntro::Update()
 		currenttimepenguin = realtime;
 		firstpenguin = false;
 	}
-	if (realtime < currenttimepenguin + (animationtime/2)) {
+	if (realtime < currenttimepenguin + (animationtime / 2)) {
 		App->renderer->Blit(sprites, 122, 146, &penguinrect);
 	}
 	penguinrect.y = 264;
-	if ((realtime >= currenttimepenguin + (animationtime/2)) && (realtime < currenttimepenguin + animationtime)) {
+	if ((realtime >= currenttimepenguin + (animationtime / 2)) && (realtime < currenttimepenguin + animationtime)) {
 		App->renderer->Blit(sprites, 121, 146, &penguinrect);
 	}
 	if (realtime >= currenttimepenguin + animationtime) {
@@ -672,8 +628,126 @@ update_status ModuleSceneIntro::Update()
 		penguinrect.y = 247;
 		App->renderer->Blit(sprites, 122, 146, &penguinrect);
 	}
-	
-	
+
+	SDL_Rect carddefaultrect;
+	carddefaultrect.h = 24;
+	carddefaultrect.w = 14;
+	carddefaultrect.x = 76;
+	carddefaultrect.y = 88;
+	SDL_Rect cardrect;
+	cardrect.h = 24;
+	cardrect.w = 14;
+	cardrect.x = 91;
+	cardrect.y = 88;
+
+	if (sensorcard10triggered == false) {
+		App->renderer->Blit(sprites, 105, 261, &carddefaultrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 105, 261, &cardrect);
+	}
+	cardrect.x += 15;
+	if (sensorcardJtriggered == false) {
+		App->renderer->Blit(sprites, 121, 261, &carddefaultrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 121, 261, &cardrect);
+	}
+	cardrect.x += 15;
+	if (sensorcardQtriggered == false) {
+		App->renderer->Blit(sprites, 137, 261, &carddefaultrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 137, 261, &cardrect);
+	}
+	cardrect.x += 15;
+	if (sensorcardKtriggered == false) {
+		App->renderer->Blit(sprites, 153, 261, &carddefaultrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 153, 261, &cardrect);
+	}
+	cardrect.x += 15;
+	if (sensorcardAtriggered == false) {
+		App->renderer->Blit(sprites, 169, 261, &carddefaultrect);
+	}
+	else {
+		App->renderer->Blit(sprites, 169, 261, &cardrect);
+	}
+	if ((sensorcard10triggered == true) &&
+		(sensorcardJtriggered == true) &&
+		(sensorcardQtriggered == true) &&
+		(sensorcardKtriggered == true) &&
+		(sensorcardAtriggered == true)) {
+		cardstriggered = true;
+	}
+	else {
+		cardstriggered = false;
+	}
+	if (cardstriggered == true) {
+		if (orangemaploaded == false) {
+			main_board = App->textures->Load("pinball/Pinball_Main_Board_Orange.png");
+			orangemaploaded = true;
+		}
+	}
+
+	p2List_item<PhysBody*>* c = circles.getFirst();
+
+	while(c != NULL)
+	{
+		int x, y;
+		c->data->GetPosition(x, y);
+		SDL_Rect ballrect;
+		ballrect.x = 94;
+		ballrect.y = 342;
+		ballrect.h = 12;
+		ballrect.w = 11;
+		App->renderer->Blit(sprites, x, y, &ballrect, 1.0f);
+		c = c->next;
+	}
+
+	c = boxes.getFirst();
+
+	while(c != NULL)
+	{
+		int x, y;
+		c->data->GetPosition(x, y);
+		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
+		if(ray_on)
+		{
+			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
+			if(hit >= 0)
+				ray_hit = hit;
+		}
+		c = c->next;
+	}
+
+	c = ricks.getFirst();
+
+	while(c != NULL)
+	{
+		int x, y;
+		c->data->GetPosition(x, y);
+		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
+		c = c->next;
+	}
+
+	// ray -----------------
+	if(ray_on == true)
+	{
+		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
+		destination.Normalize();
+		destination *= ray_hit;
+
+		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
+
+		if(normal.x != 0.0f)
+			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
+	}
+
+	if (points > maxpoints) {
+		maxpoints = points;
+	}
 
 	//title
 	//title with score
@@ -748,6 +822,26 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				{
 					currenttimeexit = realtime;
 					sensorballpassedexittriggered = true;
+				}
+				if (bodyA == sensorcard10 || bodyB == sensorcard10)
+				{
+					sensorcard10triggered = true;
+				}
+				if (bodyA == sensorcardJ || bodyB == sensorcardJ)
+				{
+					sensorcardJtriggered = true;
+				}
+				if (bodyA == sensorcardQ || bodyB == sensorcardQ)
+				{
+					sensorcardQtriggered = true;
+				}
+				if (bodyA == sensorcardK || bodyB == sensorcardK)
+				{
+					sensorcardKtriggered = true;
+				}
+				if (bodyA == sensorcardA || bodyB == sensorcardA)
+				{
+					sensorcardAtriggered = true;
 				}
 			}
 		}

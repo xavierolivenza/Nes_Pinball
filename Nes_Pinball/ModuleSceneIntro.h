@@ -49,6 +49,20 @@ public:
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
 
+	PhysBody* sensorcard10;
+	PhysBody* sensorcardJ;
+	PhysBody* sensorcardQ;
+	PhysBody* sensorcardK;
+	PhysBody* sensorcardA;
+
+	bool sensorcard10triggered = false;
+	bool sensorcardJtriggered = false;
+	bool sensorcardQtriggered = false;
+	bool sensorcardKtriggered = false;
+	bool sensorcardAtriggered = false;
+	bool cardstriggered = false;
+	bool orangemaploaded = false;
+
 	p2List<PhysBody*> paddlesL;
 	p2List<PhysBody*> paddlesR;
 
