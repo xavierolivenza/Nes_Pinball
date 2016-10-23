@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
-	godball = App->physics->CreateCircle(144, 446, 9, b2_staticBody);
+	godball = App->physics->CreateCircle(144, 446, 6, b2_staticBody);
 	godball->body->SetActive(false);
 
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6);
@@ -698,6 +698,12 @@ update_status ModuleSceneIntro::Update()
 			godball->body->SetActive(true);
 			orangemaploaded = true;
 		}
+		SDL_Rect godballrect;
+		godballrect.x = 77;
+		godballrect.y = 361;
+		godballrect.h = 12;
+		godballrect.w = 12;
+		App->renderer->Blit(sprites, 138, 440, &godballrect);
 	}
 
 	p2List_item<PhysBody*>* c = circles.getFirst();

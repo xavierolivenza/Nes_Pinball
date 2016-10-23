@@ -346,7 +346,7 @@ void ModulePhysics::PaddleStopR()
 	}
 }
 
-PhysBody* ModulePhysics::CreateCircle(float x, float y, float radius, b2BodyType type)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType type)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -370,7 +370,7 @@ PhysBody* ModulePhysics::CreateCircle(float x, float y, float radius, b2BodyType
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(float x, float y, float width, float height, b2BodyType type)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -448,7 +448,7 @@ PhysBody* ModulePhysics::CreateRectangleKickerPoint(int x, int y, int width, int
 }
 */
 
-PhysBody* ModulePhysics::CreateRectangleSensor(float x, float y, float width, float height)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -475,7 +475,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(float x, float y, float width, fl
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(float x, float y, int* points, float size)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
