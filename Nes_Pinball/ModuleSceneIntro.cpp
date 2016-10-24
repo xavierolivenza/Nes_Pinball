@@ -69,9 +69,9 @@ bool ModuleSceneIntro::Start()
 	sensorchicken2 = App->physics->CreateRectangleSensor(145, 391, 8, 12, 0);
 	sensorchicken3 = App->physics->CreateRectangleSensor(164, 391, 8, 12, 0);
 
-	sensorminispring1 = App->physics->CreateRectangleSensor(80, 407, 13, 5, 0);
+	sensorminispring1 = App->physics->CreateRectangleSensor(80, 407, 13, 3, 0);
 	sensorminispring1->body->SetActive(false);
-	sensorminispring2 = App->physics->CreateRectangleSensor(209, 407, 13, 5, 0);
+	sensorminispring2 = App->physics->CreateRectangleSensor(209, 407, 13, 3, 0);
 	sensorminispring2->body->SetActive(false);
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
@@ -346,6 +346,11 @@ bool ModuleSceneIntro::Start()
 	chicken2.y = 232;
 	chicken2.h = 12;
 	chicken2.w = 8;
+
+	minispring.x = 107;
+	minispring.y = 206;
+	minispring.h = 6;
+	minispring.w = 11;
 
 	//Create initial ball
 	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
@@ -746,6 +751,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 138, 440, &godballrect);
 	}
 
+	//Chickens
 	if (chicken1state == 1) {
 		App->renderer->Blit(sprites, 120, 385, &egg);
 	}
@@ -768,10 +774,30 @@ update_status ModuleSceneIntro::Update()
 		minispringsactivated = true;
 	}
 
+	//Minisprings
 	if (minispringsactivated == true) {
+		if (sensorminispring1->body->IsActive() == false) {
+			sensorminispring1->body->SetActive(true);
+		}
+		if (sensorminispring2->body->IsActive() == false) {
+			sensorminispring2->body->SetActive(true);
+		}
+		minispringsactivated = false;
 	}
+	if (sensorminispring1->body->IsActive() == true) {
+		App->renderer->Blit(sprites, 74, 404, &minispring);
+	}
+	if (sensorminispring2->body->IsActive() == true) {
+		App->renderer->Blit(sprites, 203, 404, &minispring);
+	}
+	if (sensorminispring1triggered == true) {
+		sensorminispring1->body->SetActive(false);
+		sensorminispring1triggered = false;
+	}
+	if (sensorminispring2triggered == true) {
 		sensorminispring2->body->SetActive(false);
-
+		sensorminispring2triggered = false;
+	}
 
 
 
@@ -1010,6 +1036,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					if (chicken3state >= 3) {
 						chicken3state = 0;
 					}
+				}
+				if (bodyA == sensorminispring1 || bodyB == sensorminispring1)
+				{
+					sensorminispring1triggered = true;
+				}
+				if (bodyA == sensorminispring2 || bodyB == sensorminispring2)
+				{
+					sensorminispring2triggered = true;
 				}
 			}
 		}
