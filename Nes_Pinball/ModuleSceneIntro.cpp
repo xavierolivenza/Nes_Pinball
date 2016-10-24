@@ -775,7 +775,7 @@ update_status ModuleSceneIntro::Update()
 			minispringsactivatedfirsttime = true;
 		}
 	}
-	if ((chicken1state == 0) || (chicken2state == 0) || (chicken3state == 0)) {
+	if ((chicken1state != 2) || (chicken2state != 2) || (chicken3state != 2)) {
 		minispringsactivated = false;
 	}
 
@@ -1039,10 +1039,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorminispring1 || bodyB == sensorminispring1)
 				{
 					sensorminispring1triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -25), true);
 				}
 				if (bodyA == sensorminispring2 || bodyB == sensorminispring2)
 				{
 					sensorminispring2triggered = true;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -25), true);
 				}
 			}
 		}
