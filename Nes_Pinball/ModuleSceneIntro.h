@@ -115,15 +115,16 @@ public:
 	SDL_Rect egg;
 	SDL_Rect chicken1;
 	SDL_Rect chicken2;
-	bool firstchicken1 = true;
-	bool firstchicken2 = true;
-	bool firstchicken3 = true;
-	int currenttimechicken1 = 0;
-	int currenttimechicken2 = 0;
-	int currenttimechicken3 = 0;
+	bool firstchicken = true;
+	int currenttimechicken = 0;
 	PhysBody* sensorchicken1;
 	PhysBody* sensorchicken2;
 	PhysBody* sensorchicken3;
-	void Blitchicken(int, int);
+
+
+
+
+
+	void BlitChickenAnimation(int, int, SDL_Rect&, SDL_Rect&);
 
 };

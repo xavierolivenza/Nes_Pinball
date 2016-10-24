@@ -650,7 +650,6 @@ update_status ModuleSceneIntro::Update()
 	penguinrect.w = 46;
 	penguinrect.x = 95;
 	penguinrect.y = 247;
-
 	uint penguinanimationtime = 1000;
 	if (firstpenguin == true) {
 		currenttimepenguin = realtime;
@@ -744,21 +743,28 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 120, 385, &egg);
 	}
 	if (chicken1state == 2) {
-		Blitchicken(120, 385);
+		BlitChickenAnimation(120, 385, chicken1, chicken2);
 	}
 	if (chicken2state == 1) {
 		App->renderer->Blit(sprites, 141, 385, &egg);
 	}
 	if (chicken2state == 2) {
-		Blitchicken(141, 385);
+		BlitChickenAnimation(141, 385, chicken1, chicken2);
 	}
 	if (chicken3state == 1) {
 		App->renderer->Blit(sprites, 160, 385, &egg);
 	}
 	if (chicken3state == 2) {
-		Blitchicken(160, 385);
+		BlitChickenAnimation(160, 385, chicken1, chicken2);
 	}
 	if ((chicken1state == 2) && (chicken2state == 2) && (chicken3state == 2)) {
+
+
+
+
+
+
+
 
 	}
 
@@ -862,23 +868,23 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::Blitchicken(int x, int y) {
-	uint chickenanimationtime = 500;
-	if (firstchicken1 == true) {
-		currenttimechicken1 = realtime;
-		firstchicken1 = false;
+void ModuleSceneIntro::BlitChickenAnimation(int x, int y, SDL_Rect& rect1, SDL_Rect& rect2) {
+	uint time = 500;
+	if (firstchicken == true) {
+		currenttimechicken = realtime;
+		firstchicken = false;
 	}
-	if (realtime < currenttimechicken1 + (chickenanimationtime / 2)) {
-		App->renderer->Blit(sprites, x, y, &chicken1);
+	if (realtime < currenttimechicken + (time / 2)) {
+		App->renderer->Blit(sprites, x, y, &rect1);
 	}
-	if ((realtime >= currenttimechicken1 + (chickenanimationtime / 2)) && (realtime < currenttimechicken1 + chickenanimationtime)) {
-		App->renderer->Blit(sprites, x, y, &chicken2);
+	if ((realtime >= currenttimechicken + (time / 2)) && (realtime < currenttimechicken + time)) {
+		App->renderer->Blit(sprites, x, y, &rect2);
 	}
-	if (realtime >= currenttimechicken1 + chickenanimationtime) {
-		firstchicken1 = true;
+	if (realtime >= currenttimechicken + time) {
+		firstchicken = true;
 		//first blit of the animation
 		//needed for constant blit, if not added, 1 frame is not printed
-		App->renderer->Blit(sprites, x, y, &chicken1);
+		App->renderer->Blit(sprites, x, y, &rect1);
 	}
 }
 
