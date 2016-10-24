@@ -149,4 +149,25 @@ public:
 	bool sensorcoin8triggered = false;
 	int currenttimecoin = 0;
 
+	SDL_Rect directionalwall1rect;
+	PhysBody* directionalwall1;
+	PhysBody* sensordirectionalwallin1;
+	PhysBody* sensordirectionalwallout1;
+	bool sensordirectionalwallin1triggered = false;
+	bool sensordirectionalwallout1triggered = false;
+
+	SDL_Rect directionalwall2rect;
+	PhysBody* directionalwall2;
+	PhysBody* sensordirectionalwallin2;
+	PhysBody* sensordirectionalwallout2;
+	bool sensordirectionalwallin2triggered = false;
+	bool sensordirectionalwallout2triggered = false;
+
+	SDL_Rect directionalwall3rect;
+	PhysBody* directionalwall3;
+	PhysBody* sensordirectionalwallin3;
+	PhysBody* sensordirectionalwallout3;
+	bool sensordirectionalwallin3triggered = false;
+	bool sensordirectionalwallout3triggered = false;
+
 };
