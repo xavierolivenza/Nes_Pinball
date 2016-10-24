@@ -85,6 +85,7 @@ public:
 	SDL_Texture* sprites;
 
 	uint bonus_fx;
+	uint paddle_fx;
 	p2Point<int> ray;
 	bool ray_on;
 

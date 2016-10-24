@@ -38,7 +38,9 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
+	
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
 	godball = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
@@ -456,6 +458,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveL();
+		App->audio->PlayFx(paddle_fx);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
@@ -464,6 +467,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveR();
+		App->audio->PlayFx(paddle_fx);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
@@ -473,6 +477,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveL();
+		App->audio->PlayFx(paddle_fx);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
 	{
@@ -482,6 +487,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		App->physics->PaddleMoveR();
+		App->audio->PlayFx(paddle_fx);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
 	{
@@ -1070,7 +1076,7 @@ void ModuleSceneIntro::BlitChickenAnimation(int x, int y, SDL_Rect& rect1, SDL_R
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	App->audio->PlayFx(bonus_fx);
+	//App->audio->PlayFx(bonus_fx);
 	if (bodyA != nullptr && bodyB != nullptr) {
 		if (bodyA->body != nullptr && bodyB->body != nullptr)
 		{
