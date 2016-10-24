@@ -89,11 +89,11 @@ bool ModuleSceneIntro::Start()
 	sensordirectionalwallin1 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
-	directionalwall2 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
+	//directionalwall2 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
 	//sensordirectionalwallin2 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	//sensordirectionalwallout2 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
-	directionalwall3 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
+	//directionalwall3 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
 	//sensordirectionalwallin3 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	//sensordirectionalwallout3 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
@@ -1032,6 +1032,7 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 	
+	//directional walls
 	App->renderer->Blit(sprites, 96, 29, &directionalwall1rect);
 	if (sensordirectionalwallin1triggered == true) {
 		directionalwall1->body->SetActive(false);
