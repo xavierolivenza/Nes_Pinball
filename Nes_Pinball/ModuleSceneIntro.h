@@ -120,11 +120,9 @@ public:
 	PhysBody* sensorchicken1;
 	PhysBody* sensorchicken2;
 	PhysBody* sensorchicken3;
-
-
-
-
-
 	void BlitChickenAnimation(int, int, SDL_Rect&, SDL_Rect&);
 
+	bool minispringsactivated = false;
+	PhysBody* sensorminispring1;
+	PhysBody* sensorminispring2;
 };

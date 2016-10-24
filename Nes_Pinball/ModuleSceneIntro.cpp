@@ -69,6 +69,11 @@ bool ModuleSceneIntro::Start()
 	sensorchicken2 = App->physics->CreateRectangleSensor(145, 391, 8, 12, 0);
 	sensorchicken3 = App->physics->CreateRectangleSensor(164, 391, 8, 12, 0);
 
+	sensorminispring1 = App->physics->CreateRectangleSensor(80, 407, 13, 5, 0);
+	sensorminispring1->body->SetActive(false);
+	sensorminispring2 = App->physics->CreateRectangleSensor(209, 407, 13, 5, 0);
+	sensorminispring2->body->SetActive(false);
+
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
 	int Pinball_MainBoard_2_coords[74] = {
@@ -509,6 +514,8 @@ update_status ModuleSceneIntro::Update()
 			chicken2state = 1;
 			chicken3state = 1;
 			godball->body->SetActive(false);
+			sensorminispring1->body->SetActive(false);
+			sensorminispring2->body->SetActive(false);
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 		}
 		newball = false;
@@ -758,15 +765,20 @@ update_status ModuleSceneIntro::Update()
 		BlitChickenAnimation(160, 385, chicken1, chicken2);
 	}
 	if ((chicken1state == 2) && (chicken2state == 2) && (chicken3state == 2)) {
-
-
-
-
-
-
-
-
+		minispringsactivated = true;
 	}
+
+	if (minispringsactivated == true) {
+	}
+		sensorminispring2->body->SetActive(false);
+
+
+
+
+
+
+
+
 
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
