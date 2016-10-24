@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
-	godball = App->physics->CreateCircle(143, 446, 7, b2_staticBody);
+	godball = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
 	godball->body->SetActive(false);
 
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6, 0);
@@ -64,6 +64,10 @@ bool ModuleSceneIntro::Start()
 	sensorcardQ = App->physics->CreateRectangleSensor(145, 291, 12, 4, 0);
 	sensorcardK = App->physics->CreateRectangleSensor(161, 291, 12, 4, 0);
 	sensorcardA = App->physics->CreateRectangleSensor(177, 291, 12, 4, 0);
+
+	sensorchicken1 = App->physics->CreateRectangleSensor(124, 391, 8, 12, 0);
+	sensorchicken2 = App->physics->CreateRectangleSensor(145, 391, 8, 12, 0);
+	sensorchicken3 = App->physics->CreateRectangleSensor(164, 391, 8, 12, 0);
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
@@ -325,6 +329,19 @@ bool ModuleSceneIntro::Start()
 	springrect_5.h = 44;
 	springrect_5.w = 9;
 
+	egg.x = 125;
+	egg.y = 232;
+	egg.h = 12;
+	egg.w = 8;
+	chicken1.x = 103;
+	chicken1.y = 232;
+	chicken1.h = 12;
+	chicken1.w = 8;
+	chicken2.x = 114;
+	chicken2.y = 232;
+	chicken2.h = 12;
+	chicken2.w = 8;
+
 	//Create initial ball
 	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
 	circles.getFirst()->data->body->SetBullet(true);
@@ -464,7 +481,7 @@ update_status ModuleSceneIntro::Update()
 			wall->body->SetActive(true);
 		}
 	}
-	circles.getLast();
+
 	if ((newball == true) || (reset == true)) {
 		if ((numballs > 0) || (reset == true)) {
 
@@ -488,12 +505,14 @@ update_status ModuleSceneIntro::Update()
 			sensorcardAtriggered = false;
 			cardstriggered = false;
 			orangemaploaded = false;
+			chicken1state = 1;
+			chicken2state = 1;
+			chicken3state = 1;
 			godball->body->SetActive(false);
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 		}
 		newball = false;
 	}
-
 
 	/*
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -632,19 +651,19 @@ update_status ModuleSceneIntro::Update()
 	penguinrect.x = 95;
 	penguinrect.y = 247;
 
-	uint animationtime = 1000;
+	uint penguinanimationtime = 1000;
 	if (firstpenguin == true) {
 		currenttimepenguin = realtime;
 		firstpenguin = false;
 	}
-	if (realtime < currenttimepenguin + (animationtime / 2)) {
+	if (realtime < currenttimepenguin + (penguinanimationtime / 2)) {
 		App->renderer->Blit(sprites, 122, 146, &penguinrect);
 	}
 	penguinrect.y = 264;
-	if ((realtime >= currenttimepenguin + (animationtime / 2)) && (realtime < currenttimepenguin + animationtime)) {
+	if ((realtime >= currenttimepenguin + (penguinanimationtime / 2)) && (realtime < currenttimepenguin + penguinanimationtime)) {
 		App->renderer->Blit(sprites, 121, 146, &penguinrect);
 	}
-	if (realtime >= currenttimepenguin + animationtime) {
+	if (realtime >= currenttimepenguin + penguinanimationtime) {
 		firstpenguin = true;
 		//first blit of the animation
 		//needed for constant blit, if not added, 1 frame is not printed
@@ -719,6 +738,28 @@ update_status ModuleSceneIntro::Update()
 		godballrect.h = 12;
 		godballrect.w = 12;
 		App->renderer->Blit(sprites, 138, 440, &godballrect);
+	}
+
+	if (chicken1state == 1) {
+		App->renderer->Blit(sprites, 120, 385, &egg);
+	}
+	if (chicken1state == 2) {
+		Blitchicken(120, 385);
+	}
+	if (chicken2state == 1) {
+		App->renderer->Blit(sprites, 141, 385, &egg);
+	}
+	if (chicken2state == 2) {
+		Blitchicken(141, 385);
+	}
+	if (chicken3state == 1) {
+		App->renderer->Blit(sprites, 160, 385, &egg);
+	}
+	if (chicken3state == 2) {
+		Blitchicken(160, 385);
+	}
+	if ((chicken1state == 2) && (chicken2state == 2) && (chicken3state == 2)) {
+
 	}
 
 	p2List_item<PhysBody*>* c = circles.getFirst();
@@ -821,6 +862,26 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModuleSceneIntro::Blitchicken(int x, int y) {
+	uint chickenanimationtime = 500;
+	if (firstchicken1 == true) {
+		currenttimechicken1 = realtime;
+		firstchicken1 = false;
+	}
+	if (realtime < currenttimechicken1 + (chickenanimationtime / 2)) {
+		App->renderer->Blit(sprites, x, y, &chicken1);
+	}
+	if ((realtime >= currenttimechicken1 + (chickenanimationtime / 2)) && (realtime < currenttimechicken1 + chickenanimationtime)) {
+		App->renderer->Blit(sprites, x, y, &chicken2);
+	}
+	if (realtime >= currenttimechicken1 + chickenanimationtime) {
+		firstchicken1 = true;
+		//first blit of the animation
+		//needed for constant blit, if not added, 1 frame is not printed
+		App->renderer->Blit(sprites, x, y, &chicken1);
+	}
+}
+
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	App->audio->PlayFx(bonus_fx);
@@ -910,6 +971,27 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorcardA || bodyB == sensorcardA)
 				{
 					sensorcardAtriggered = true;
+				}
+				if (bodyA == sensorchicken1 || bodyB == sensorchicken1)
+				{
+					chicken1state += 1;
+					if (chicken1state >= 3) {
+						chicken1state = 0;
+					}
+				}
+				if (bodyA == sensorchicken2 || bodyB == sensorchicken2)
+				{
+					chicken2state += 1;
+					if (chicken2state >= 3) {
+						chicken2state = 0;
+					}
+				}
+				if (bodyA == sensorchicken3 || bodyB == sensorchicken3)
+				{
+					chicken3state += 1;
+					if (chicken3state >= 3) {
+						chicken3state = 0;
+					}
 				}
 			}
 		}

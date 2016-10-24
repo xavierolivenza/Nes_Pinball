@@ -105,4 +105,25 @@ public:
 	uint points = 0;
 	uint maxpoints = 0;
 	int numballs = 3;
+
+	// 0=dead
+	// 1=egg
+	// 2=chicken
+	int chicken1state = 1;
+	int chicken2state = 1;
+	int chicken3state = 1;
+	SDL_Rect egg;
+	SDL_Rect chicken1;
+	SDL_Rect chicken2;
+	bool firstchicken1 = true;
+	bool firstchicken2 = true;
+	bool firstchicken3 = true;
+	int currenttimechicken1 = 0;
+	int currenttimechicken2 = 0;
+	int currenttimechicken3 = 0;
+	PhysBody* sensorchicken1;
+	PhysBody* sensorchicken2;
+	PhysBody* sensorchicken3;
+	void Blitchicken(int, int);
+
 };
