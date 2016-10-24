@@ -147,5 +147,6 @@ public:
 	bool sensorcoin6triggered = false;
 	bool sensorcoin7triggered = false;
 	bool sensorcoin8triggered = false;
+	int currenttimecoin = 0;
 
 };

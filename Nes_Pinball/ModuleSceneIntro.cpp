@@ -878,9 +878,31 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (sensorcoin8triggered == false) {
 		App->renderer->Blit(sprites, 91, 41, &coinrect);
+		currenttimecoin = realtime;
 	}
 	else {
 		sensorcoin8->body->SetActive(false);
+	}
+
+	if (sensorcoin8triggered == true) {
+		if (realtime > currenttimecoin + 1000) {
+			sensorcoin1triggered = false;
+			sensorcoin2triggered = false;
+			sensorcoin3triggered = false;
+			sensorcoin4triggered = false;
+			sensorcoin5triggered = false;
+			sensorcoin6triggered = false;
+			sensorcoin7triggered = false;
+			sensorcoin8triggered = false;
+			sensorcoin1->body->SetActive(true);
+			sensorcoin2->body->SetActive(true);
+			sensorcoin3->body->SetActive(true);
+			sensorcoin4->body->SetActive(true);
+			sensorcoin5->body->SetActive(true);
+			sensorcoin6->body->SetActive(true);
+			sensorcoin7->body->SetActive(true);
+			sensorcoin8->body->SetActive(true);
+		}
 	}
 
 	//draw ball, keep it at the bottom to draw the ball above all
