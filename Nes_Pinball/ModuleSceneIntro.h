@@ -123,6 +123,7 @@ public:
 	void BlitChickenAnimation(int, int, SDL_Rect&, SDL_Rect&);
 
 	bool minispringsactivated = false;
+	bool minispringsactivatedfirsttime = false;
 	SDL_Rect minispring;
 	PhysBody* sensorminispring1;
 	PhysBody* sensorminispring2;

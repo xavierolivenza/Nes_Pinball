@@ -590,13 +590,13 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
+	//numbers
 	SDL_Rect sensornumrect;
 	sensornumrect.h = 7;
 	sensornumrect.w = 15;
 	sensornumrect.x = 84;
 	sensornumrect.y = 118;
 	int y = 293;
-
 	if (sensor1triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
@@ -630,19 +630,16 @@ update_status ModuleSceneIntro::Update()
 	if (sensor7triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
-
 	SDL_Rect wallrect;
 	wallrect.h = 24;
 	wallrect.w = 13;
 	wallrect.x = 62;
 	wallrect.y = 349;
-
 	SDL_Rect exitrect;
 	exitrect.h = 7;
 	exitrect.w = 19;
 	exitrect.x = 119;
 	exitrect.y = 223;
-
 	if ((sensor1triggered == false) ||
 		(sensor2triggered == false) ||
 		(sensor3triggered == false) ||
@@ -657,6 +654,7 @@ update_status ModuleSceneIntro::Update()
 		wall->body->SetActive(false);
 	}
 
+	//penguins
 	SDL_Rect penguinrect;
 	penguinrect.h = 14;
 	penguinrect.w = 46;
@@ -682,6 +680,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 122, 146, &penguinrect);
 	}
 
+	//cards
 	SDL_Rect carddefaultrect;
 	carddefaultrect.h = 24;
 	carddefaultrect.w = 14;
@@ -770,25 +769,25 @@ update_status ModuleSceneIntro::Update()
 	if (chicken3state == 2) {
 		BlitChickenAnimation(160, 385, chicken1, chicken2);
 	}
-	if ((chicken1state == 2) && (chicken2state == 2) && (chicken3state == 2)) {
-		minispringsactivated = true;
+	if (minispringsactivated == false) {
+		if ((chicken1state == 2) && (chicken2state == 2) && (chicken3state == 2)) {
+			minispringsactivated = true;
+			minispringsactivatedfirsttime = true;
+		}
+	}
+	if ((chicken1state == 0) || (chicken2state == 0) || (chicken3state == 0)) {
+		minispringsactivated = false;
 	}
 
 	//Minisprings
-	if (minispringsactivated == true) {
+	if (minispringsactivatedfirsttime == true) {
 		if (sensorminispring1->body->IsActive() == false) {
 			sensorminispring1->body->SetActive(true);
 		}
 		if (sensorminispring2->body->IsActive() == false) {
 			sensorminispring2->body->SetActive(true);
 		}
-		minispringsactivated = false;
-	}
-	if (sensorminispring1->body->IsActive() == true) {
-		App->renderer->Blit(sprites, 74, 404, &minispring);
-	}
-	if (sensorminispring2->body->IsActive() == true) {
-		App->renderer->Blit(sprites, 203, 404, &minispring);
+		minispringsactivatedfirsttime = false;
 	}
 	if (sensorminispring1triggered == true) {
 		sensorminispring1->body->SetActive(false);
@@ -798,14 +797,14 @@ update_status ModuleSceneIntro::Update()
 		sensorminispring2->body->SetActive(false);
 		sensorminispring2triggered = false;
 	}
+	if (sensorminispring1->body->IsActive() == true) {
+		App->renderer->Blit(sprites, 74, 404, &minispring);
+	}
+	if (sensorminispring2->body->IsActive() == true) {
+		App->renderer->Blit(sprites, 203, 404, &minispring);
+	}
 
-
-
-
-
-
-
-
+	//draw ball, keep it at the bottom to draw the ball above all
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
