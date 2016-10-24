@@ -74,6 +74,15 @@ bool ModuleSceneIntro::Start()
 	sensorminispring2 = App->physics->CreateRectangleSensor(209, 407, 13, 3, 0);
 	sensorminispring2->body->SetActive(false);
 
+	sensorcoin1 = App->physics->CreateRectangleSensor(89, 103, 5, 5, 0);
+	sensorcoin2 = App->physics->CreateRectangleSensor(86, 95, 5, 5, 0);
+	sensorcoin3 = App->physics->CreateRectangleSensor(83, 87, 5, 5, 0);
+	sensorcoin4 = App->physics->CreateRectangleSensor(80, 78, 5, 5, 0);
+	sensorcoin5 = App->physics->CreateRectangleSensor(80, 68, 5, 5, 0);
+	sensorcoin6 = App->physics->CreateRectangleSensor(82, 58, 5, 5, 0);
+	sensorcoin7 = App->physics->CreateRectangleSensor(88, 50, 5, 5, 0);
+	sensorcoin8 = App->physics->CreateRectangleSensor(93, 43, 5, 5, 0);
+
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
 	int Pinball_MainBoard_2_coords[74] = {
@@ -352,6 +361,10 @@ bool ModuleSceneIntro::Start()
 	minispring.h = 6;
 	minispring.w = 11;
 
+	coinrect.x = 152;
+	coinrect.y = 368;
+	coinrect.h = coinrect.w = 5;
+
 	//Create initial ball
 	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
 	circles.getFirst()->data->body->SetBullet(true);
@@ -521,6 +534,22 @@ update_status ModuleSceneIntro::Update()
 			godball->body->SetActive(false);
 			sensorminispring1->body->SetActive(false);
 			sensorminispring2->body->SetActive(false);
+			sensorcoin1triggered = false;
+			sensorcoin2triggered = false;
+			sensorcoin3triggered = false;
+			sensorcoin4triggered = false;
+			sensorcoin5triggered = false;
+			sensorcoin6triggered = false;
+			sensorcoin7triggered = false;
+			sensorcoin8triggered = false;
+			sensorcoin1->body->SetActive(true);
+			sensorcoin2->body->SetActive(true);
+			sensorcoin3->body->SetActive(true);
+			sensorcoin4->body->SetActive(true);
+			sensorcoin5->body->SetActive(true);
+			sensorcoin6->body->SetActive(true);
+			sensorcoin7->body->SetActive(true);
+			sensorcoin8->body->SetActive(true);
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 		}
 		newball = false;
@@ -804,6 +833,56 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 203, 404, &minispring);
 	}
 
+	//coins
+	if (sensorcoin1triggered == false) {
+		App->renderer->Blit(sprites, 87, 101, &coinrect);
+	}
+	else {
+		sensorcoin1->body->SetActive(false);
+	}
+	if (sensorcoin2triggered == false) {
+		App->renderer->Blit(sprites, 84, 93, &coinrect);
+	}
+	else {
+		sensorcoin2->body->SetActive(false);
+	}
+	if (sensorcoin3triggered == false) {
+		App->renderer->Blit(sprites, 81, 85, &coinrect);
+	}
+	else {
+		sensorcoin3->body->SetActive(false);
+	}
+	if (sensorcoin4triggered == false) {
+		App->renderer->Blit(sprites, 78, 76, &coinrect);
+	}
+	else {
+		sensorcoin4->body->SetActive(false);
+	}
+	if (sensorcoin5triggered == false) {
+		App->renderer->Blit(sprites, 78, 66, &coinrect);
+	}
+	else {
+		sensorcoin5->body->SetActive(false);
+	}
+	if (sensorcoin6triggered == false) {
+		App->renderer->Blit(sprites, 80, 56, &coinrect);
+	}
+	else {
+		sensorcoin6->body->SetActive(false);
+	}
+	if (sensorcoin7triggered == false) {
+		App->renderer->Blit(sprites, 86, 48, &coinrect);
+	}
+	else {
+		sensorcoin7->body->SetActive(false);
+	}
+	if (sensorcoin8triggered == false) {
+		App->renderer->Blit(sprites, 91, 41, &coinrect);
+	}
+	else {
+		sensorcoin8->body->SetActive(false);
+	}
+
 	//draw ball, keep it at the bottom to draw the ball above all
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
@@ -1045,6 +1124,38 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				{
 					sensorminispring2triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -25), true);
+				}
+				if (bodyA == sensorcoin1 || bodyB == sensorcoin1) {
+					sensorcoin1triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin2 || bodyB == sensorcoin2) {
+					sensorcoin2triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin3 || bodyB == sensorcoin3) {
+					sensorcoin3triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin4 || bodyB == sensorcoin4) {
+					sensorcoin4triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin5 || bodyB == sensorcoin5) {
+					sensorcoin5triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin6 || bodyB == sensorcoin6) {
+					sensorcoin6triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin7 || bodyB == sensorcoin7) {
+					sensorcoin7triggered = true;
+					points += 100;
+				}
+				if (bodyA == sensorcoin8 || bodyB == sensorcoin8) {
+					sensorcoin8triggered = true;
+					points += 100;
 				}
 			}
 		}

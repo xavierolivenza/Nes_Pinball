@@ -130,4 +130,22 @@ public:
 	bool sensorminispring1triggered = false;
 	bool sensorminispring2triggered = false;
 
+	SDL_Rect coinrect;
+	PhysBody* sensorcoin1;
+	PhysBody* sensorcoin2;
+	PhysBody* sensorcoin3;
+	PhysBody* sensorcoin4;
+	PhysBody* sensorcoin5;
+	PhysBody* sensorcoin6;
+	PhysBody* sensorcoin7;
+	PhysBody* sensorcoin8;
+	bool sensorcoin1triggered = false;
+	bool sensorcoin2triggered = false;
+	bool sensorcoin3triggered = false;
+	bool sensorcoin4triggered = false;
+	bool sensorcoin5triggered = false;
+	bool sensorcoin6triggered = false;
+	bool sensorcoin7triggered = false;
+	bool sensorcoin8triggered = false;
+
 };
