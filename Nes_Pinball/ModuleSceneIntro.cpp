@@ -102,6 +102,11 @@ bool ModuleSceneIntro::Start()
 	sensordirectionalwallin3 = App->physics->CreateRectangleSensor(207, 129, 2, 21, 150);
 	sensordirectionalwallout3 = App->physics->CreateRectangleSensor(200, 136, 2, 21, 150);
 
+	sensorextrapoints1 = App->physics->CreateRectangleSensor(90, 132, 2, 7, 0);
+	sensorextrapoints2 = App->physics->CreateRectangleSensor(90, 140, 2, 7, 0);
+	sensorextrapoints3 = App->physics->CreateRectangleSensor(90, 148, 2, 7, 0);
+	sensorextrapoints4 = App->physics->CreateRectangleSensor(90, 156, 2, 7, 0);
+
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
 	int Pinball_MainBoard_2_coords[74] = {
@@ -397,6 +402,11 @@ bool ModuleSceneIntro::Start()
 	directionalwall3rect.h = 13;
 	directionalwall3rect.w = 12;
 
+	extracoinsrect.x = 137;
+	extracoinsrect.y = 366;
+	extracoinsrect.h = 7;
+	extracoinsrect.w = 2;
+
 	//Create initial ball
 	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
 	circles.getFirst()->data->body->SetBullet(true);
@@ -591,6 +601,10 @@ update_status ModuleSceneIntro::Update()
 			sensorcoin6->body->SetActive(true);
 			sensorcoin7->body->SetActive(true);
 			sensorcoin8->body->SetActive(true);
+			sensorextrapoints1triggered = false;
+			sensorextrapoints2triggered = false;
+			sensorextrapoints3triggered = false;
+			sensorextrapoints4triggered = false;
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 			game_over = false;
 		}
@@ -953,6 +967,20 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	//extra points
+	if (sensorextrapoints1triggered == false) {
+		App->renderer->Blit(sprites, 89, 129, &extracoinsrect);
+	}
+	if (sensorextrapoints2triggered == false) {
+		App->renderer->Blit(sprites, 89, 137, &extracoinsrect);
+	}
+	if (sensorextrapoints3triggered == false) {
+		App->renderer->Blit(sprites, 89, 145, &extracoinsrect);
+	}
+	if (sensorextrapoints4triggered == false) {
+		App->renderer->Blit(sprites, 89, 153, &extracoinsrect);
+	}
+
 	//draw ball, keep it at the bottom to draw the ball above all
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
@@ -1138,37 +1166,37 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor1 || bodyB == sensor1)
 				{
 					sensor1triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor2 || bodyB == sensor2)
 				{
 					sensor2triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor3 || bodyB == sensor3)
 				{
 					sensor3triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor4 || bodyB == sensor4)
 				{
 					sensor4triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor5 || bodyB == sensor5)
 				{
 					sensor5triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor6 || bodyB == sensor6)
 				{
 					sensor6triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor7 || bodyB == sensor7)
 				{
 					sensor7triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(2, 0), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
@@ -1275,6 +1303,26 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensordirectionalwallout3 || bodyB == sensordirectionalwallout3) {
 					sensordirectionalwallout3triggered = true;
+				}
+				if (bodyA == sensorextrapoints1 || bodyB == sensorextrapoints1) {
+					sensorextrapoints1triggered = true;
+					points += 100;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+				}
+				if (bodyA == sensorextrapoints2 || bodyB == sensorextrapoints2) {
+					sensorextrapoints2triggered = true;
+					points += 100;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+				}
+				if (bodyA == sensorextrapoints3 || bodyB == sensorextrapoints3) {
+					sensorextrapoints3triggered = true;
+					points += 100;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+				}
+				if (bodyA == sensorextrapoints4 || bodyB == sensorextrapoints4) {
+					sensorextrapoints4triggered = true;
+					points += 100;
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 			}
 		}

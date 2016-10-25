@@ -174,4 +174,14 @@ public:
 	bool sensordirectionalwallin3triggered = false;
 	bool sensordirectionalwallout3triggered = false;
 
+	SDL_Rect extracoinsrect;
+	PhysBody* sensorextrapoints1;
+	PhysBody* sensorextrapoints2;
+	PhysBody* sensorextrapoints3;
+	PhysBody* sensorextrapoints4;
+	bool sensorextrapoints1triggered = false;
+	bool sensorextrapoints2triggered = false;
+	bool sensorextrapoints3triggered = false;
+	bool sensorextrapoints4triggered = false;
+
 };
