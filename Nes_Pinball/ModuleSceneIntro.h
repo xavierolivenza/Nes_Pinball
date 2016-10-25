@@ -84,6 +84,8 @@ public:
 
 	SDL_Texture* main_board;
 	SDL_Texture* sprites;
+	SDL_Texture* game_over_tex;
+	bool game_over = false;
 
 	uint bonus_fx;
 	uint paddle_fx;

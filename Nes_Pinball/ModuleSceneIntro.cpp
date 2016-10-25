@@ -31,6 +31,7 @@ bool ModuleSceneIntro::Start()
 
 	main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 	sprites = App->textures->Load("pinball/PinballSheet.png");
+	game_over_tex = App->textures->Load("pinball/Game_Over.png");
 
 	//Test board
 	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
@@ -540,6 +541,10 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	if (numballs <= 0) {
+		game_over = true;
+	}
+
 	if ((newball == true) || (reset == true)) {
 		if ((numballs > 0) || (reset == true)) {
 
@@ -587,8 +592,13 @@ update_status ModuleSceneIntro::Update()
 			sensorcoin7->body->SetActive(true);
 			sensorcoin8->body->SetActive(true);
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
+			game_over = false;
 		}
 		newball = false;
+	}
+
+	if (game_over == true) {
+		App->renderer->Blit(game_over_tex, 110, 233);
 	}
 
 	/*
