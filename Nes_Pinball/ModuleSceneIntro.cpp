@@ -42,7 +42,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
 
-	wall = App->physics->CreateRectangle(214, 305, 9, 24, b2_staticBody);
+	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody);
 	godball = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
 	godball->body->SetActive(false);
 
@@ -85,17 +85,17 @@ bool ModuleSceneIntro::Start()
 	sensorcoin7 = App->physics->CreateRectangleSensor(88, 50, 5, 5, 0);
 	sensorcoin8 = App->physics->CreateRectangleSensor(93, 43, 5, 5, 0);
 
-	directionalwall1 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
+	directionalwall1 = App->physics->CreateRectangle(101, 37, 7, 21, 0, b2_staticBody);
 	sensordirectionalwallin1 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
-	//directionalwall2 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
-	//sensordirectionalwallin2 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
-	//sensordirectionalwallout2 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
+	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody);
+	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(203, 36, 2, 21, 0);
+	sensordirectionalwallout2 = App->physics->CreateRectangleSensor(188, 34, 2, 21, 0);
 
-	//directionalwall3 = App->physics->CreateRectangle(101, 37, 7, 21, b2_staticBody);
-	//sensordirectionalwallin3 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
-	//sensordirectionalwallout3 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
+	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody);
+	sensordirectionalwallin3 = App->physics->CreateRectangleSensor(207, 129, 2, 21, 150);
+	sensordirectionalwallout3 = App->physics->CreateRectangleSensor(200, 136, 2, 21, 150);
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
@@ -1044,11 +1044,24 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	App->renderer->Blit(sprites, 193, 26, &directionalwall2rect);
-
-
+	if (sensordirectionalwallin2triggered == true) {
+		directionalwall2->body->SetActive(false);
+		sensordirectionalwallin2triggered = false;
+	}
+	if (sensordirectionalwallout2triggered == true) {
+		directionalwall2->body->SetActive(true);
+		sensordirectionalwallout2triggered = false;
+	}
 
 	App->renderer->Blit(sprites, 198, 127, &directionalwall3rect);
-
+	if (sensordirectionalwallin3triggered == true) {
+		directionalwall3->body->SetActive(false);
+		sensordirectionalwallin3triggered = false;
+	}
+	if (sensordirectionalwallout3triggered == true) {
+		directionalwall3->body->SetActive(true);
+		sensordirectionalwallout3triggered = false;
+	}
 
 	App->window->SetTitle("Nes Pinball (C++, SDL2.0, Box2D)");
 
@@ -1233,6 +1246,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensordirectionalwallout1 || bodyB == sensordirectionalwallout1) {
 					sensordirectionalwallout1triggered = true;
+				}
+				if (bodyA == sensordirectionalwallin2 || bodyB == sensordirectionalwallin2) {
+					sensordirectionalwallin2triggered = true;
+				}
+				if (bodyA == sensordirectionalwallout2 || bodyB == sensordirectionalwallout2) {
+					sensordirectionalwallout2triggered = true;
+				}
+				if (bodyA == sensordirectionalwallin3 || bodyB == sensordirectionalwallin3) {
+					sensordirectionalwallin3triggered = true;
+				}
+				if (bodyA == sensordirectionalwallout3 || bodyB == sensordirectionalwallout3) {
+					sensordirectionalwallout3triggered = true;
 				}
 			}
 		}

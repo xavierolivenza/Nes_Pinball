@@ -43,7 +43,7 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, float radius, b2BodyType type);
-	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, float angle, b2BodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, float angle);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 
