@@ -26,7 +26,8 @@ public:
 	p2List<PhysBody*> board;
 
 	PhysBody* wall;
-	PhysBody* godball;
+	PhysBody* godball1;
+	PhysBody* godball2;
 
 	bool springanimation = false;
 

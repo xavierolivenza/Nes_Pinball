@@ -43,8 +43,12 @@ bool ModuleSceneIntro::Start()
 	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody);
-	godball = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
-	godball->body->SetActive(false);
+
+	godball1 = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
+	godball1->body->SetActive(false);
+
+	godball2 = App->physics->CreateCircle(144, 217, 7, b2_staticBody);
+	godball2->body->SetActive(false);
 
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6, 0);
 	sensor2 = App->physics->CreateRectangleSensor(82, 304, 2, 6, 0);
@@ -562,7 +566,8 @@ update_status ModuleSceneIntro::Update()
 			chicken1state = 1;
 			chicken2state = 1;
 			chicken3state = 1;
-			godball->body->SetActive(false);
+			godball1->body->SetActive(false);
+			godball2->body->SetActive(false);
 			sensorminispring1->body->SetActive(false);
 			sensorminispring2->body->SetActive(false);
 			sensorcoin1triggered = false;
@@ -799,7 +804,8 @@ update_status ModuleSceneIntro::Update()
 	if (cardstriggered == true) {
 		if (orangemaploaded == false) {
 			main_board = App->textures->Load("pinball/Pinball_Main_Board_Orange.png");
-			godball->body->SetActive(true);
+			godball1->body->SetActive(true);
+			godball2->body->SetActive(true);
 			orangemaploaded = true;
 		}
 		SDL_Rect godballrect;
@@ -808,6 +814,7 @@ update_status ModuleSceneIntro::Update()
 		godballrect.h = 12;
 		godballrect.w = 12;
 		App->renderer->Blit(sprites, 138, 440, &godballrect);
+		App->renderer->Blit(sprites, 138, 210, &godballrect);
 	}
 
 	//Chickens
