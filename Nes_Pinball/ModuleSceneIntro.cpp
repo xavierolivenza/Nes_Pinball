@@ -567,6 +567,13 @@ update_status ModuleSceneIntro::Update()
 			sensor5triggered = false;
 			sensor6triggered = false;
 			sensor7triggered = false;
+			sensor1triggeredpoints = false;
+			sensor2triggeredpoints = false;
+			sensor3triggeredpoints = false;
+			sensor4triggeredpoints = false;
+			sensor5triggeredpoints = false;
+			sensor6triggeredpoints = false;
+			sensor7triggeredpoints = false;
 			sensorballpassedexittriggered = false;
 			wall->body->SetActive(true);
 		}
@@ -591,6 +598,13 @@ update_status ModuleSceneIntro::Update()
 			sensor5triggered = false;
 			sensor6triggered = false;
 			sensor7triggered = false;
+			sensor1triggeredpoints = false;
+			sensor2triggeredpoints = false;
+			sensor3triggeredpoints = false;
+			sensor4triggeredpoints = false;
+			sensor5triggeredpoints = false;
+			sensor6triggeredpoints = false;
+			sensor7triggeredpoints = false;
 			wall->body->SetActive(true);
 			sensorcard10triggered = false;
 			sensorcardJtriggered = false;
@@ -626,6 +640,10 @@ update_status ModuleSceneIntro::Update()
 			sensorextrapoints2triggered = false;
 			sensorextrapoints3triggered = false;
 			sensorextrapoints4triggered = false;
+			sensorextrapoints1triggeredpoints = false;
+			sensorextrapoints2triggeredpoints = false;
+			sensorextrapoints3triggeredpoints = false;
+			sensorextrapoints4triggeredpoints = false;
 			main_board = App->textures->Load("pinball/Pinball_Main_Board.png");
 			game_over = false;
 		}
@@ -700,46 +718,105 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
+	//Moving platform
+	b2Vec2 cratepos = kincreate->body->GetPosition();
+	SDL_Rect crateposrect;
+	crateposrect.h = 5;
+	crateposrect.w = 14;
+	crateposrect.x = 159;
+	crateposrect.y = 368;
+	App->renderer->Blit(sprites, METERS_TO_PIXELS(cratepos.x) - (crateposrect.w / 2), METERS_TO_PIXELS(cratepos.y) - (crateposrect.h / 2), &crateposrect);
+
 	//numbers
 	SDL_Rect sensornumrect;
 	sensornumrect.h = 7;
 	sensornumrect.w = 15;
 	sensornumrect.x = 84;
 	sensornumrect.y = 118;
+
 	int y = 293;
 	if (sensor1triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor1triggeredpoints == false) {
+			points += 100;
+			sensor1triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor2triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor2triggeredpoints == false) {
+			points += 100;
+			sensor2triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor3triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor3triggeredpoints == false) {
+			points += 100;
+			sensor3triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor4triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor4triggeredpoints == false) {
+			points += 100;
+			sensor4triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor5triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor5triggeredpoints == false) {
+			points += 100;
+			sensor5triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor6triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor6triggeredpoints == false) {
+			points += 100;
+			sensor6triggeredpoints = true;
+		}
+	}
+
 	sensornumrect.y += 8;
 	y += 8;
 	if (sensor7triggered == false) {
 		App->renderer->Blit(sprites, 81, y, &sensornumrect);
 	}
+	else {
+		if (sensor7triggeredpoints == false) {
+			points += 100;
+			sensor7triggeredpoints = true;
+		}
+	}
+
 	SDL_Rect wallrect;
 	wallrect.h = 24;
 	wallrect.w = 13;
@@ -849,6 +926,7 @@ update_status ModuleSceneIntro::Update()
 	if (cardstriggered == true) {
 		if (orangemaploaded == false) {
 			main_board = App->textures->Load("pinball/Pinball_Main_Board_Orange.png");
+			points += 5000;
 			godball1->body->SetActive(true);
 			godball2->body->SetActive(true);
 			orangemaploaded = true;
@@ -992,14 +1070,41 @@ update_status ModuleSceneIntro::Update()
 	if (sensorextrapoints1triggered == false) {
 		App->renderer->Blit(sprites, 89, 129, &extracoinsrect);
 	}
+	else {
+		if (sensorextrapoints1triggeredpoints == false) {
+			points += 100;
+			sensorextrapoints1triggeredpoints = true;
+		}
+	}
+
 	if (sensorextrapoints2triggered == false) {
 		App->renderer->Blit(sprites, 89, 137, &extracoinsrect);
 	}
+	else {
+		if (sensorextrapoints2triggeredpoints == false) {
+			points += 100;
+			sensorextrapoints2triggeredpoints = true;
+		}
+	}
+
 	if (sensorextrapoints3triggered == false) {
 		App->renderer->Blit(sprites, 89, 145, &extracoinsrect);
 	}
+	else {
+		if (sensorextrapoints3triggeredpoints == false) {
+			points += 100;
+			sensorextrapoints3triggeredpoints = true;
+		}
+	}
+
 	if (sensorextrapoints4triggered == false) {
 		App->renderer->Blit(sprites, 89, 153, &extracoinsrect);
+	}
+	else {
+		if (sensorextrapoints4triggeredpoints == false) {
+			points += 100;
+			sensorextrapoints4triggeredpoints = true;
+		}
 	}
 
 	//draw ball, keep it at the bottom to draw the ball above all
@@ -1226,22 +1331,27 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorcard10 || bodyB == sensorcard10)
 				{
+					points += 500;
 					sensorcard10triggered = true;
 				}
 				if (bodyA == sensorcardJ || bodyB == sensorcardJ)
 				{
+					points += 500;
 					sensorcardJtriggered = true;
 				}
 				if (bodyA == sensorcardQ || bodyB == sensorcardQ)
 				{
+					points += 500;
 					sensorcardQtriggered = true;
 				}
 				if (bodyA == sensorcardK || bodyB == sensorcardK)
 				{
+					points += 500;
 					sensorcardKtriggered = true;
 				}
 				if (bodyA == sensorcardA || bodyB == sensorcardA)
 				{
+					points += 500;
 					sensorcardAtriggered = true;
 				}
 				if (bodyA == sensorchicken1 || bodyB == sensorchicken1)
@@ -1268,12 +1378,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorminispring1 || bodyB == sensorminispring1)
 				{
 					sensorminispring1triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -25), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -27), true);
 				}
 				if (bodyA == sensorminispring2 || bodyB == sensorminispring2)
 				{
 					sensorminispring2triggered = true;
-					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -25), true);
+					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -27), true);
 				}
 				if (bodyA == sensorcoin1 || bodyB == sensorcoin1) {
 					sensorcoin1triggered = true;
@@ -1327,22 +1437,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorextrapoints1 || bodyB == sensorextrapoints1) {
 					sensorextrapoints1triggered = true;
-					points += 100;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints2 || bodyB == sensorextrapoints2) {
 					sensorextrapoints2triggered = true;
-					points += 100;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints3 || bodyB == sensorextrapoints3) {
 					sensorextrapoints3triggered = true;
-					points += 100;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints4 || bodyB == sensorextrapoints4) {
 					sensorextrapoints4triggered = true;
-					points += 100;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 			}

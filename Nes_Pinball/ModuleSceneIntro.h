@@ -53,6 +53,13 @@ public:
 	bool sensor5triggered = false;
 	bool sensor6triggered = false;
 	bool sensor7triggered = false;
+	bool sensor1triggeredpoints = false;
+	bool sensor2triggeredpoints = false;
+	bool sensor3triggeredpoints = false;
+	bool sensor4triggeredpoints = false;
+	bool sensor5triggeredpoints = false;
+	bool sensor6triggeredpoints = false;
+	bool sensor7triggeredpoints = false;
 	bool sensorballpassedexittriggered = false;
 
 	PhysBody* sensor100points;
@@ -190,5 +197,9 @@ public:
 	bool sensorextrapoints2triggered = false;
 	bool sensorextrapoints3triggered = false;
 	bool sensorextrapoints4triggered = false;
+	bool sensorextrapoints1triggeredpoints = false;
+	bool sensorextrapoints2triggeredpoints = false;
+	bool sensorextrapoints3triggeredpoints = false;
+	bool sensorextrapoints4triggeredpoints = false;
 
 };
