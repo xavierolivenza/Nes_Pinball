@@ -95,7 +95,8 @@ bool ModuleSceneIntro::Start()
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
 	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody, 0);
-	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(203, 36, 2, 21, 0);
+	//sensordirectionalwallin2 = App->physics->CreateRectangleSensor(203, 36, 2, 21, 0);
+	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(225, 75, 10, 2, 0);
 	sensordirectionalwallout2 = App->physics->CreateRectangleSensor(188, 34, 2, 21, 0);
 
 	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody, 0);
@@ -460,20 +461,21 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
+		uint animation_time = 1000;
 		springanimation = true;
-		if (realtime < currenttime + 500) {
+		if (realtime < currenttime + (animation_time / 4)) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_1);
 		}
-		if ((realtime > currenttime + 500) && (realtime < currenttime + 1000)) {
+		if ((realtime > currenttime + (animation_time / 4)) && (realtime < currenttime + 2 * (animation_time / 4))) {
             App->renderer->Blit(sprites, 220, 401, &springrect_2);
 		}
-    	if ((realtime > currenttime + 1000) && (realtime < currenttime + 1500)) {
+    	if ((realtime > currenttime + 2 * (animation_time / 4)) && (realtime < currenttime + 3 * (animation_time / 4))) {
 			App->renderer->Blit(sprites, 219, 401, &springrect_3);
 		}
-		if ((realtime > currenttime + 1500) && (realtime < currenttime + 2000)) {
+		if ((realtime > currenttime + 3 * (animation_time / 4)) && (realtime < currenttime + animation_time)) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_4);
 		}
-		if (realtime > currenttime + 2000) {
+		if (realtime > currenttime + animation_time) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
 		}
 	}
