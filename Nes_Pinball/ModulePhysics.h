@@ -51,8 +51,8 @@ public:
 	//PhysBody* CreateRectangleKicker(int x, int y, int width, int height);
 	//PhysBody* CreateRectangleKickerPoint(int x, int y, int width, int height);
 
-	PhysBody* CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
-	PhysBody* CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
+	PhysBody* CreatePaddleL(int x, int y, float angd, float angu);
+	PhysBody* CreatePaddleR(int x, int y, float angd, float angu);
 
 	b2DistanceJointDef* CreateLineJoint(b2Body* bodyA, b2Body* bodyB, p2Point<float> Local_Anchor_A, p2Point<float> Local_Anchor_B, float frequency, float damping);
 

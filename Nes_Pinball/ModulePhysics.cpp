@@ -137,7 +137,7 @@ update_status ModulePhysics::PreUpdate()
 }
 
 //PADDLE L
-PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
+PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu)
 {
 	//cirlce
 	b2BodyDef body;
@@ -244,7 +244,7 @@ void ModulePhysics::PaddleStopL()
 }
 
 //PADDLE R
-PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts)
+PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu)
 {
 	//cirlce
 	b2BodyDef body;

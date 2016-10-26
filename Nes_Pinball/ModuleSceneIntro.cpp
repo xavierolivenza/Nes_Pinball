@@ -412,12 +412,12 @@ bool ModuleSceneIntro::Start()
 	circles.getFirst()->data->body->SetBullet(true);
 	circles.getLast()->data->listener = this;
 
-	paddlesL.add(App->physics->CreatePaddleL(108, 429, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesL.add(App->physics->CreatePaddleL(109, 201, (40 * DEGTORAD), -30 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
-	paddlesR.add(App->physics->CreatePaddleR(179, 203, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
+	paddlesL.add(App->physics->CreatePaddleL(108, 429, (40 * DEGTORAD), -30 * DEGTORAD));
+	paddlesL.add(App->physics->CreatePaddleL(109, 201, (40 * DEGTORAD), -30 * DEGTORAD));
+	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD));
+	paddlesR.add(App->physics->CreatePaddleR(179, 203, (146 * DEGTORAD), 78 * DEGTORAD));
 
-	bouncer = App->physics->CreateRectangle(226, 420, 3, 10, 0, b2_dynamicBody);
+	bouncer = App->physics->CreateRectangle(226, 420, 3, 9, 0, b2_dynamicBody);
 	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody);
 	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
 
