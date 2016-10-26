@@ -40,6 +40,9 @@ public:
 	PhysBody* sensor7;
 	PhysBody* sensorballpassedexit;
 
+	PhysBody* bouncer;
+	PhysBody* bouncerWheel;
+
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
 	bool sensor3triggered = false;

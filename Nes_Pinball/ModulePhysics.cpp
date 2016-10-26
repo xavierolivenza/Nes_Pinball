@@ -37,60 +37,63 @@ bool ModulePhysics::Start()
 	
 	b2BodyDef body;
 	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(69), PIXEL_TO_METERS(0));
+	body.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(0));
 
 	b2Body* main_board = world->CreateBody(&body);
 
 	//Board create
-	int Pinball_MainBoard_1_coords[74] = {
-		50, 476,
-		4, 430,
-		4, 372,
-		18, 357,
-		10, 349,
-		10, 283,
-		3, 262,
-		3, 175,
-		19, 160,
-		19, 126,
-		4, 83,
-		4, 64,
-		9, 49,
-		18, 37,
-		30, 28,
-		38, 25,
-		127, 25,
-		141, 31,
-		151, 40,
-		160, 56,
-		163, 69,
-		163, 397,
-		150, 397,
-		150, 317,
-		139, 317,
-		139, 348,
-		132, 357,
-		146, 372,
-		146, 431,
-		100, 476,
-		100, 524,
-		167, 524,
-		167, 1,
-		1, 1,
-		1, 524,
-		50, 524,
-		50, 476
+	int Pinball_MainBoard_1_coords[80] = {
+		119, 476,
+		72, 430,
+		72, 372,
+		87, 357,
+		80, 349,
+		80, 283,
+		72, 261,
+		72, 175,
+		87, 160,
+		87, 126,
+		72, 80,
+		72, 66,
+		78, 49,
+		88, 36,
+		99, 28,
+		106, 25,
+		196, 25,
+		208, 30,
+		219, 39,
+		227, 52,
+		231, 63,
+		232, 69,
+		232, 394,
+		228, 396,
+		228, 445,
+		223, 445,
+		223, 396,
+		219, 394,
+		219, 317,
+		209, 317,
+		209, 349,
+		201, 357,
+		215, 371,
+		215, 431,
+		169, 476,
+		235, 476,
+		235, 1,
+		69, 1,
+		69, 476,
+		119, 476
 	};
 
 	b2ChainShape shape;
-	b2Vec2* p = new b2Vec2[72 / 2];
+	b2Vec2* p = new b2Vec2[78 / 2];
 
-	for (uint i = 0; i < 72 / 2; ++i)
+	for (uint i = 0; i < 78 / 2; ++i)
 	{
 		p[i].x = PIXEL_TO_METERS(Pinball_MainBoard_1_coords[i * 2 + 0]);
 		p[i].y = PIXEL_TO_METERS(Pinball_MainBoard_1_coords[i * 2 + 1]);
 	}
-	shape.CreateLoop(p, 72 / 2);
+	shape.CreateLoop(p, 78 / 2);
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
@@ -344,6 +347,24 @@ void ModulePhysics::PaddleStopR()
 		temp->data->EnableMotor(false);
 		temp = temp->next;
 	}
+}
+
+b2DistanceJointDef* ModulePhysics::CreateLineJoint(b2Body* bodyA, b2Body* bodyB, p2Point<float> Local_Anchor_A, p2Point<float> Local_Anchor_B, float frequency, float damping)
+{
+	b2DistanceJointDef DistanceJoinDef;
+
+	DistanceJoinDef.bodyA = bodyA;
+	DistanceJoinDef.bodyB = bodyB;
+
+	DistanceJoinDef.localAnchorA.Set(Local_Anchor_A.x, Local_Anchor_A.y);
+	DistanceJoinDef.localAnchorB.Set(Local_Anchor_B.x, Local_Anchor_B.y);
+
+	DistanceJoinDef.dampingRatio = damping;
+	DistanceJoinDef.frequencyHz = frequency;
+
+	world->CreateJoint(&DistanceJoinDef);
+	b2DistanceJointDef* dis_joint = (b2DistanceJointDef*)world->CreateJoint(&DistanceJoinDef);
+	return dis_joint;
 }
 
 PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType type)

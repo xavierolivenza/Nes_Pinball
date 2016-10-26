@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "p2Point.h"
 #include "Box2D/Box2D/Box2D.h"
 
 #define GRAVITY_X 0.0f
@@ -53,6 +54,7 @@ public:
 	PhysBody* CreatePaddleL(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
 	PhysBody* CreatePaddleR(int x, int y, float angd, float angu, uint16 categbts, uint16 mskbts);
 
+	b2DistanceJointDef* CreateLineJoint(b2Body* bodyA, b2Body* bodyB, p2Point<float> Local_Anchor_A, p2Point<float> Local_Anchor_B, float frequency, float damping);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

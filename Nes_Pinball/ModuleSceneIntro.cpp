@@ -417,6 +417,10 @@ bool ModuleSceneIntro::Start()
 	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
 	paddlesR.add(App->physics->CreatePaddleR(179, 203, (146 * DEGTORAD), 78 * DEGTORAD, 0x0001, 0x0001 | 0x0008));
 
+	bouncer = App->physics->CreateRectangle(226, 420, 3, 10, 0, b2_dynamicBody);
+	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody);
+	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
+
 	return ret;
 }
 
@@ -468,6 +472,18 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->Blit(sprites, 220, 401, &springrect_5);
 		}
 	}
+
+	//spring
+	static float Push = 0.0f;
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	{
+		Push += 25.0f;
+		bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
+	}
+	else
+		Push = 0.0f;
+
+	b2Vec2 pos = bouncer->body->GetPosition();
 
 	//MAKES PADDLES MOVE
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
