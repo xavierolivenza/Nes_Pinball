@@ -63,7 +63,6 @@ bool ModuleSceneIntro::Start()
 	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4, 172);
 	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4, 0);
 	sensor500points2 = App->physics->CreateRectangleSensor(127, 60, 12, 4, 0);
-	sensor500points3 = App->physics->CreateRectangleSensor(206, 93, 12, 4, 0);
 	sensor1000points = App->physics->CreateRectangleSensor(144, 60, 12, 4, 0);
 
 	sensorcard10 = App->physics->CreateRectangleSensor(113, 291, 12, 4, 0);
@@ -95,12 +94,11 @@ bool ModuleSceneIntro::Start()
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
 	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody, 0);
-	//sensordirectionalwallin2 = App->physics->CreateRectangleSensor(203, 36, 2, 21, 0);
 	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(225, 75, 10, 2, 0);
 	sensordirectionalwallout2 = App->physics->CreateRectangleSensor(188, 34, 2, 21, 0);
 
 	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody, 0);
-	sensordirectionalwallin3 = App->physics->CreateRectangleSensor(207, 129, 2, 21, 150);
+	sensordirectionalwallin3 = App->physics->CreateRectangleSensor(206, 100, 10, 2, 0);
 	sensordirectionalwallout3 = App->physics->CreateRectangleSensor(200, 136, 2, 21, 150);
 
 	sensorextrapoints1 = App->physics->CreateRectangleSensor(90, 132, 2, 7, 0);
@@ -1282,8 +1280,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					points += 100;
 				}
 				if (bodyA == sensor500points1 || bodyB == sensor500points1 ||
-					bodyA == sensor500points2 || bodyB == sensor500points2 ||
-					bodyA == sensor500points3 || bodyB == sensor500points3)
+					bodyA == sensor500points2 || bodyB == sensor500points2)
 				{
 					points += 500;
 				}
@@ -1432,6 +1429,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensordirectionalwallout2triggered = true;
 				}
 				if (bodyA == sensordirectionalwallin3 || bodyB == sensordirectionalwallin3) {
+					points += 500;
 					sensordirectionalwallin3triggered = true;
 				}
 				if (bodyA == sensordirectionalwallout3 || bodyB == sensordirectionalwallout3) {

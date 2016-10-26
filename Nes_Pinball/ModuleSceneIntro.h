@@ -65,7 +65,6 @@ public:
 	PhysBody* sensor100points;
 	PhysBody* sensor500points1;
 	PhysBody* sensor500points2;
-	PhysBody* sensor500points3;
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
 
