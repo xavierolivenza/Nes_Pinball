@@ -337,15 +337,6 @@ bool ModuleSceneIntro::Start()
 	};
 	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_8_Board_coords, 12));
 
-	int Pinball_MiniMovingBoard[10] = {
-		122, 139,
-		134, 139,
-		134, 142,
-		122, 142,
-		122, 139
-	};
-	board.add(App->physics->CreateChain(-5, 0, Pinball_MiniMovingBoard, 8));
-
 	springrect_1.x = 102;
 	springrect_1.y = 129;
 	springrect_1.h = 44;
@@ -421,6 +412,9 @@ bool ModuleSceneIntro::Start()
 	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody);
 	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
 
+	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody);
+	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
+
 	return ret;
 }
 
@@ -438,6 +432,14 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(main_board, 0, 0);
 
 	realtime = SDL_GetTicks();
+
+	kincreate->GetPosition(pinkplatformx, pinkplatformy);
+		if (pinkplatformx < 120) {
+			kincreate->body->SetLinearVelocity(b2Vec2(0.75, 0));
+		}
+		else if (pinkplatformx > 152) {
+			kincreate->body->SetLinearVelocity(b2Vec2(-0.75, 0));
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{

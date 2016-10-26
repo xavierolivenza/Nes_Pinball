@@ -42,6 +42,7 @@ public:
 
 	PhysBody* bouncer;
 	PhysBody* bouncerWheel;
+	PhysBody* kincreate;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
@@ -155,6 +156,7 @@ public:
 	bool sensorcoin7triggered = false;
 	bool sensorcoin8triggered = false;
 	int currenttimecoin = 0;
+	int pinkplatformx, pinkplatformy;
 
 	SDL_Rect directionalwall1rect;
 	PhysBody* directionalwall1;
