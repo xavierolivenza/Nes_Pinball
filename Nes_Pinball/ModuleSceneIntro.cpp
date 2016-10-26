@@ -45,10 +45,10 @@ bool ModuleSceneIntro::Start()
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody);
 
-	godball1 = App->physics->CreateCircle(144, 446, 7, b2_staticBody);
+	godball1 = App->physics->CreateCircle(144, 446, 7, b2_staticBody, 0);
 	godball1->body->SetActive(false);
 
-	godball2 = App->physics->CreateCircle(144, 217, 7, b2_staticBody);
+	godball2 = App->physics->CreateCircle(144, 217, 7, b2_staticBody, 0);
 	godball2->body->SetActive(false);
 
 	sensor1 = App->physics->CreateRectangleSensor(82, 296, 2, 6, 0);
@@ -399,7 +399,7 @@ bool ModuleSceneIntro::Start()
 	extracoinsrect.w = 2;
 
 	//Create initial ball
-	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody));
+	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody, 0));
 	circles.getFirst()->data->body->SetBullet(true);
 	circles.getLast()->data->listener = this;
 
@@ -414,6 +414,9 @@ bool ModuleSceneIntro::Start()
 
 	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody);
 	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
+
+	pinkballs1 = App->physics->CreateCircleSensor(125, 120, 15, b2_staticBody, 25, 2);
+	pinkball1 = App->physics->CreateCircle(125, 120, 11, b2_staticBody, 2);
 
 	return ret;
 }
@@ -437,7 +440,7 @@ update_status ModuleSceneIntro::Update()
 		if (pinkplatformx < 120) {
 			kincreate->body->SetLinearVelocity(b2Vec2(0.75, 0));
 		}
-		else if (pinkplatformx > 152) {
+		else if (pinkplatformx > 153) {
 			kincreate->body->SetLinearVelocity(b2Vec2(-0.75, 0));
 	}
 
@@ -479,7 +482,7 @@ update_status ModuleSceneIntro::Update()
 	static float Push = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		Push += 25.0f;
+		Push += 100.0f;
 		bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
 	}
 	else
@@ -531,14 +534,14 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody, 0));
 		circles.getFirst()->data->body->SetBullet(true);
 		circles.getLast()->data->listener = this;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_REPEAT)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 5.5, b2_dynamicBody, 0));
 		circles.getFirst()->data->body->SetBullet(true);
 		circles.getLast()->data->listener = this;
 	}
