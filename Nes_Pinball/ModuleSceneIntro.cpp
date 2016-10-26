@@ -405,7 +405,7 @@ bool ModuleSceneIntro::Start()
 	paddlesL.add(App->physics->CreatePaddleL(108, 429, (40 * DEGTORAD), -30 * DEGTORAD));
 	paddlesL.add(App->physics->CreatePaddleL(109, 201, (40 * DEGTORAD), -30 * DEGTORAD));
 	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD));
-	paddlesR.add(App->physics->CreatePaddleR(179, 203, (146 * DEGTORAD), 78 * DEGTORAD));
+	paddlesR.add(App->physics->CreatePaddleR(180, 203, (146 * DEGTORAD), 78 * DEGTORAD));
 
 	bouncer = App->physics->CreateRectangle(226, 425, 1, 9, 0, b2_dynamicBody, 0);
 	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody, 0);
@@ -414,8 +414,14 @@ bool ModuleSceneIntro::Start()
 	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 1);
 	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
 
-	pinkballs1 = App->physics->CreateCircleSensor(125, 120, 15, b2_staticBody, 25, 2);
-	pinkball1 = App->physics->CreateCircle(125, 120, 11, b2_staticBody, 2);
+	pinkballs1 = App->physics->CreateCircleSensor(144, 100, 11, b2_staticBody, 25, 1);
+	pinkball1 = App->physics->CreateCircle(144, 100, 9, b2_staticBody, 1);
+	pinkballs2 = App->physics->CreateCircleSensor(121, 321, 11, b2_staticBody, 25, 1);
+	pinkball2 = App->physics->CreateCircle(121, 321, 9, b2_staticBody, 1);
+	pinkballs3 = App->physics->CreateCircleSensor(144, 353, 11, b2_staticBody, 25, 1);
+	pinkball3 = App->physics->CreateCircle(144, 353, 9, b2_staticBody, 1);
+	pinkballs4 = App->physics->CreateCircleSensor(169, 321, 11, b2_staticBody, 25, 1);
+	pinkball4 = App->physics->CreateCircle(169, 321, 9, b2_staticBody, 1);
 
 	return ret;
 }

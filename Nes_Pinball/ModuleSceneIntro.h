@@ -31,8 +31,10 @@ public:
 	PhysBody* bouncer;
 	PhysBody* bouncerWheel;
 	PhysBody* kincreate;
-	PhysBody* pinkballs1;
 	PhysBody* pinkball1;
+	PhysBody* pinkball2;
+	PhysBody* pinkball3;
+	PhysBody* pinkball4;
 
 	bool springanimation = false;
 
@@ -44,7 +46,10 @@ public:
 	PhysBody* sensor6;
 	PhysBody* sensor7;
 	PhysBody* sensorballpassedexit;
-
+	PhysBody* pinkballs1;
+	PhysBody* pinkballs2;
+	PhysBody* pinkballs3;
+	PhysBody* pinkballs4;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
