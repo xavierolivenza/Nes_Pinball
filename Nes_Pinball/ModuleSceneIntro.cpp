@@ -459,7 +459,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		uint animation_time = 1000;
+		uint animation_time = 500;
 		springanimation = true;
 		if (realtime < currenttime + (animation_time / 4)) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_1);
