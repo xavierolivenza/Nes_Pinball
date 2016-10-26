@@ -367,7 +367,7 @@ b2DistanceJointDef* ModulePhysics::CreateLineJoint(b2Body* bodyA, b2Body* bodyB,
 	return dis_joint;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType type)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType type, float rest)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -380,6 +380,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType typ
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
+	fixture.restitution = rest;
 
 	b->CreateFixture(&fixture);
 
@@ -496,6 +497,34 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	pbody->height = height;
 
 	return pbody;
+}
+
+PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius, b2BodyType type, int density, float rest) {
+
+	b2BodyDef body;
+
+	body.type = type;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+	
+	b2Body* b = world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(radius);
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = density;
+	fixture.restitution = rest;
+	fixture.isSensor = true;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = radius;
+
+	return pbody;
+
 }
 
 PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
