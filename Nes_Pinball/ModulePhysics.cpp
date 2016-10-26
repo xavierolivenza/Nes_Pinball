@@ -392,7 +392,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, float radius, b2BodyType typ
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float angle, b2BodyType type)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float angle, b2BodyType type, float rest)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -406,6 +406,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, fl
 	b2FixtureDef fixture;
 	fixture.shape = &box;
 	fixture.density = 1.0f;
+	fixture.restitution = rest;
 
 	b->CreateFixture(&fixture);
 
@@ -527,7 +528,7 @@ PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius, b2BodyType
 
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, float rest)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -548,6 +549,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.restitution = rest;
 	b->CreateFixture(&fixture);
 
 	delete p;

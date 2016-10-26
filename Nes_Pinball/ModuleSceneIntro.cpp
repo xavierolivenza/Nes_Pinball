@@ -43,7 +43,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
 
-	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody);
+	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody, 0);
 
 	godball1 = App->physics->CreateCircle(144, 446, 7, b2_staticBody, 0);
 	godball1->body->SetActive(false);
@@ -90,15 +90,15 @@ bool ModuleSceneIntro::Start()
 	sensorcoin7 = App->physics->CreateRectangleSensor(88, 50, 5, 5, 0);
 	sensorcoin8 = App->physics->CreateRectangleSensor(93, 43, 5, 5, 0);
 
-	directionalwall1 = App->physics->CreateRectangle(101, 37, 7, 21, 0, b2_staticBody);
+	directionalwall1 = App->physics->CreateRectangle(101, 37, 7, 21, 0, b2_staticBody, 0);
 	sensordirectionalwallin1 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
-	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody);
+	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody, 0);
 	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(203, 36, 2, 21, 0);
 	sensordirectionalwallout2 = App->physics->CreateRectangleSensor(188, 34, 2, 21, 0);
 
-	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody);
+	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody, 0);
 	sensordirectionalwallin3 = App->physics->CreateRectangleSensor(207, 129, 2, 21, 150);
 	sensordirectionalwallout3 = App->physics->CreateRectangleSensor(200, 136, 2, 21, 150);
 
@@ -148,7 +148,7 @@ bool ModuleSceneIntro::Start()
 		140, 293,
 		149, 293
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MainBoard_2_coords, 72));
+	board.add(App->physics->CreateChain(69, 0, Pinball_MainBoard_2_coords, 72, 0));
 
 	int Pinball_MiniPart_1_Board_coords[14] = {
 		34, 381,
@@ -159,7 +159,7 @@ bool ModuleSceneIntro::Start()
 		33, 382,
 		34, 381
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_1_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_1_Board_coords, 12, 1));
 
 	int Pinball_MiniPart_2_Board_coords[16] = {
 		118, 382,
@@ -171,7 +171,7 @@ bool ModuleSceneIntro::Start()
 		117, 381,
 		118, 382
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_2_Board_coords, 14));
+	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_2_Board_coords, 14, 1));
 
 	int Pinball_Part_1_Board_coords[28] = {
 		37, 43,
@@ -189,7 +189,7 @@ bool ModuleSceneIntro::Start()
 		32, 45,
 		37, 43
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Part_1_Board_coords, 26));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Part_1_Board_coords, 26, 0));
 
 	int Pinball_Part_2_Board_coords[20] = {
 		116, 88,
@@ -203,7 +203,7 @@ bool ModuleSceneIntro::Start()
 		123, 96,
 		116, 88
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Part_2_Board_coords, 18));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Part_2_Board_coords, 18, 0));
 
 	int Pinball_Part_3_Board_coords[20] = {
 		23, 181,
@@ -217,7 +217,7 @@ bool ModuleSceneIntro::Start()
 		17, 187,
 		23, 181
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Part_3_Board_coords, 18));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Part_3_Board_coords, 18, 0));
 
 	int Pinball_Line_1_coords[22] = {
 		19, 381,
@@ -232,7 +232,7 @@ bool ModuleSceneIntro::Start()
 		17, 381,
 		19, 381
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Line_1_coords, 20));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Line_1_coords, 20, 0));
 
 	int Pinball_Line_2_coords[22] = {
 		133, 381,
@@ -247,7 +247,7 @@ bool ModuleSceneIntro::Start()
 		131, 381,
 		133, 381
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Line_2_coords, 20));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Line_2_coords, 20, 0));
 
 	int Pinball_Separator_1_Board_coords[14] = {
 		67, 57,
@@ -258,7 +258,7 @@ bool ModuleSceneIntro::Start()
 		66, 58,
 		67, 57
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_1_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_1_Board_coords, 12, 0));
 
 	int Pinball_Separator_2_Board_coords[14] = {
 		84, 56,
@@ -269,7 +269,7 @@ bool ModuleSceneIntro::Start()
 		83, 58,
 		84, 56
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_2_Board_coords, 12));
+	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_2_Board_coords, 12, 0));
 
 	int Pinball_Separator_3_Board_coords[14] = {
 		36, 285,
@@ -280,7 +280,7 @@ bool ModuleSceneIntro::Start()
 		35, 286,
 		36, 285
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_3_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_3_Board_coords, 12, 0));
 
 	int Pinball_Separator_4_Board_coords[14] = {
 		52, 285,
@@ -291,7 +291,7 @@ bool ModuleSceneIntro::Start()
 		51, 286,
 		52, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_4_Board_coords, 12));
+	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_4_Board_coords, 12, 0));
 
 	int Pinball_Separator_5_Board_coords[14] = {
 		68, 285,
@@ -302,7 +302,7 @@ bool ModuleSceneIntro::Start()
 		67, 286,
 		68, 285
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_5_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_5_Board_coords, 12, 0));
 
 	int Pinball_Separator_6_Board_coords[14] = {
 		84, 285,
@@ -313,7 +313,7 @@ bool ModuleSceneIntro::Start()
 		83, 286,
 		84, 285
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_6_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_6_Board_coords, 12, 0));
 
 	int Pinball_Separator_7_Board_coords[14] = {
 		100, 285,
@@ -324,7 +324,7 @@ bool ModuleSceneIntro::Start()
 		99, 286,
 		100, 285
 	};
-	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_7_Board_coords, 12));
+	board.add(App->physics->CreateChain(68, 0, Pinball_Separator_7_Board_coords, 12, 0));
 
 	int Pinball_Separator_8_Board_coords[14] = {
 		116, 285,
@@ -335,7 +335,7 @@ bool ModuleSceneIntro::Start()
 		115, 286,
 		116, 285
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_8_Board_coords, 12));
+	board.add(App->physics->CreateChain(69, 0, Pinball_Separator_8_Board_coords, 12, 0));
 
 	springrect_1.x = 102;
 	springrect_1.y = 129;
@@ -408,11 +408,11 @@ bool ModuleSceneIntro::Start()
 	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD));
 	paddlesR.add(App->physics->CreatePaddleR(179, 203, (146 * DEGTORAD), 78 * DEGTORAD));
 
-	bouncer = App->physics->CreateRectangle(226, 420, 3, 9, 0, b2_dynamicBody);
-	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody);
+	bouncer = App->physics->CreateRectangle(226, 420, 3, 9, 0, b2_dynamicBody, 0);
+	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody, 0);
 	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
 
-	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody);
+	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 1);
 	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
 
 	pinkballs1 = App->physics->CreateCircleSensor(125, 120, 15, b2_staticBody, 25, 2);
