@@ -482,7 +482,7 @@ update_status ModuleSceneIntro::Update()
 	static float Push = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		Push += 100.0f;
+		Push += 35.0f;
 		bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
 	}
 	else
