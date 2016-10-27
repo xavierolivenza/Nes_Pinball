@@ -963,49 +963,42 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(sprites, 87, 101, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin1->body->SetActive(false);
 	}
 	if (sensorcoin2triggered == false) {
 		App->renderer->Blit(sprites, 84, 93, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin2->body->SetActive(false);
 	}
 	if (sensorcoin3triggered == false) {
 		App->renderer->Blit(sprites, 81, 85, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin3->body->SetActive(false);
 	}
 	if (sensorcoin4triggered == false) {
 		App->renderer->Blit(sprites, 78, 76, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin4->body->SetActive(false);
 	}
 	if (sensorcoin5triggered == false) {
 		App->renderer->Blit(sprites, 78, 66, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin5->body->SetActive(false);
 	}
 	if (sensorcoin6triggered == false) {
 		App->renderer->Blit(sprites, 80, 56, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin6->body->SetActive(false);
 	}
 	if (sensorcoin7triggered == false) {
 		App->renderer->Blit(sprites, 86, 48, &coinrect);
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin7->body->SetActive(false);
 	}
 	if (sensorcoin8triggered == false) {
@@ -1013,7 +1006,6 @@ update_status ModuleSceneIntro::Update()
 		currenttimecoin = realtime;
 	}
 	else {
-		App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 		sensorcoin8->body->SetActive(false);
 	}
 
@@ -1525,43 +1517,43 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorcoin1 || bodyB == sensorcoin1) {
 					sensorcoin1triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin2 || bodyB == sensorcoin2) {
 					sensorcoin2triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin3 || bodyB == sensorcoin3) {
 					sensorcoin3triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin4 || bodyB == sensorcoin4) {
 					sensorcoin4triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin5 || bodyB == sensorcoin5) {
 					sensorcoin5triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin6 || bodyB == sensorcoin6) {
 					sensorcoin6triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin7 || bodyB == sensorcoin7) {
 					sensorcoin7triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensorcoin8 || bodyB == sensorcoin8) {
 					sensordirectionalwallin1triggered = true;
 					sensorcoin8triggered = true;
 					points += 100;
-					
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 				}
 				if (bodyA == sensordirectionalwallout1 || bodyB == sensordirectionalwallout1) {
 					sensordirectionalwallout1triggered = true;
@@ -1617,7 +1609,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensorcanon1uppertriggered = true;
 				}
 				if (bodyA == sensorcanon1lower || bodyB == sensorcanon1lower) {
-					App->audio->PlayFx(Canon_Enter_fx);
 					sensorcanon1lowertriggered = true;
 				}
 				if (bodyA == sensorsound1 || bodyB == sensorsound1) {
