@@ -44,6 +44,7 @@ bool ModuleSceneIntro::Start()
 	Coins_Tickets_ToDoor_fx = App->audio->LoadFx("pinball/Coins_Tickets_ToDoor.wav");
 	Save_Spring_fx = App->audio->LoadFx("pinball/Save_Spring.wav");
 	Start_fx = App->audio->LoadFx("pinball/Start.wav");
+	Points_Lateral_fx = App->audio->LoadFx("pinball/Points_Lateral.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody, 0);
 
@@ -1376,16 +1377,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensor100points || bodyB == sensor100points)
 				{
+					App->audio->PlayFx(Points_Lateral_fx);
 					points += 100;
 					sensor100pointstriggered = true;
 				}
 				if (bodyA == sensor500points1 || bodyB == sensor500points1 ||
 					bodyA == sensor500points2 || bodyB == sensor500points2)
 				{
+					App->audio->PlayFx(Points_Lateral_fx);
 					points += 500;
 				}
 				if (bodyA == sensor1000points || bodyB == sensor1000points)
 				{
+					App->audio->PlayFx(Points_Lateral_fx);
 					points += 1000;
 				}
 				if (bodyA == sensor1 || bodyB == sensor1)
@@ -1560,6 +1564,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensordirectionalwallout2triggered = true;
 				}
 				if (bodyA == sensordirectionalwallin3 || bodyB == sensordirectionalwallin3) {
+					App->audio->PlayFx(Points_Lateral_fx);
 					points += 500;
 					sensordirectionalwallin3triggered = true;
 				}
@@ -1615,10 +1620,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensorcanon1lowertriggered = true;
 				}
 				if (bodyA == sensorsound1 || bodyB == sensorsound1) {
-
+					App->audio->PlayFx(Points_Lateral_fx);
 				}
 				if (bodyA == sensorsound2 || bodyB == sensorsound2) {
-
+					App->audio->PlayFx(Points_Lateral_fx);
 				}
 			}
 		}

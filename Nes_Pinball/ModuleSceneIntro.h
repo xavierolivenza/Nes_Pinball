@@ -107,6 +107,7 @@ public:
 	uint Coins_Tickets_ToDoor_fx;
 	uint Save_Spring_fx;
 	uint Start_fx;
+	uint Points_Lateral_fx;
 
 	p2Point<int> ray;
 	bool ray_on;
