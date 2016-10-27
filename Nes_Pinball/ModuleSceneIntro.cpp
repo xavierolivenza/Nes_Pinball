@@ -471,6 +471,11 @@ update_status ModuleSceneIntro::Update()
 		springanimation = false;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	{
+		App->audio->PlayFx(Start_fx);
+	}
+
 	if (springanimation == false) {
 		App->renderer->Blit(sprites, 220, 401, &springrect_1);
 	}
@@ -1385,36 +1390,43 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensor1 || bodyB == sensor1)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor1triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor2 || bodyB == sensor2)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor2triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor3 || bodyB == sensor3)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor3triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor4 || bodyB == sensor4)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor4triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor5 || bodyB == sensor5)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor5triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor6 || bodyB == sensor6)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor6triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensor7 || bodyB == sensor7)
 				{
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensor7triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
@@ -1425,31 +1437,37 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorcard10 || bodyB == sensorcard10)
 				{
+					App->audio->PlayFx(Card_fx);
 					points += 500;
 					sensorcard10triggered = true;
 				}
 				if (bodyA == sensorcardJ || bodyB == sensorcardJ)
 				{
+					App->audio->PlayFx(Card_fx);
 					points += 500;
 					sensorcardJtriggered = true;
 				}
 				if (bodyA == sensorcardQ || bodyB == sensorcardQ)
 				{
+					App->audio->PlayFx(Card_fx);
 					points += 500;
 					sensorcardQtriggered = true;
 				}
 				if (bodyA == sensorcardK || bodyB == sensorcardK)
 				{
+					App->audio->PlayFx(Card_fx);
 					points += 500;
 					sensorcardKtriggered = true;
 				}
 				if (bodyA == sensorcardA || bodyB == sensorcardA)
 				{
+					App->audio->PlayFx(Card_fx);
 					points += 500;
 					sensorcardAtriggered = true;
 				}
 				if (bodyA == sensorchicken1 || bodyB == sensorchicken1)
 				{
+					App->audio->PlayFx(Chicken_Platform_fx);
 					chicken1state += 1;
 					if (chicken1state >= 3) {
 						chicken1state = 0;
@@ -1457,6 +1475,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorchicken2 || bodyB == sensorchicken2)
 				{
+					App->audio->PlayFx(Chicken_Platform_fx);
 					chicken2state += 1;
 					if (chicken2state >= 3) {
 						chicken2state = 0;
@@ -1464,6 +1483,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorchicken3 || bodyB == sensorchicken3)
 				{
+					App->audio->PlayFx(Chicken_Platform_fx);
 					chicken3state += 1;
 					if (chicken3state >= 3) {
 						chicken3state = 0;
@@ -1471,46 +1491,64 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorminispring1 || bodyB == sensorminispring1)
 				{
+					App->audio->PlayFx(Save_Spring_fx);
 					sensorminispring1triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -27), true);
 				}
 				if (bodyA == sensorminispring2 || bodyB == sensorminispring2)
 				{
+					App->audio->PlayFx(Save_Spring_fx);
 					sensorminispring2triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(0, -27), true);
 				}
 				if (bodyA == sensorcoin1 || bodyB == sensorcoin1) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin1triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin2 || bodyB == sensorcoin2) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin2triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin3 || bodyB == sensorcoin3) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin3triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin4 || bodyB == sensorcoin4) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin4triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin5 || bodyB == sensorcoin5) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin5triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin6 || bodyB == sensorcoin6) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin6triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin7 || bodyB == sensorcoin7) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorcoin7triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensorcoin8 || bodyB == sensorcoin8) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensordirectionalwallin1triggered = true;
 					sensorcoin8triggered = true;
 					points += 100;
+					
 				}
 				if (bodyA == sensordirectionalwallout1 || bodyB == sensordirectionalwallout1) {
 					sensordirectionalwallout1triggered = true;
@@ -1529,48 +1567,58 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensordirectionalwallout3triggered = true;
 				}
 				if (bodyA == sensorextrapoints1 || bodyB == sensorextrapoints1) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorextrapoints1triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints2 || bodyB == sensorextrapoints2) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorextrapoints2triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints3 || bodyB == sensorextrapoints3) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorextrapoints3triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorextrapoints4 || bodyB == sensorextrapoints4) {
+					App->audio->PlayFx(Coins_Tickets_ToDoor_fx);
 					sensorextrapoints4triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
 				if (bodyA == sensorpinkball1 || bodyB == sensorpinkball1) {
+					App->audio->PlayFx(Bouncing_Balls_fx);
 					points += 100;
 					sensorpinkball1striggered = true;
 				}
 				if (bodyA == sensorpinkball2 || bodyB == sensorpinkball2) {
+					App->audio->PlayFx(Bouncing_Balls_fx);
 					points += 100;
 					sensorpinkball2striggered = true;
 				}
 				if (bodyA == sensorpinkball3 || bodyB == sensorpinkball3) {
+					App->audio->PlayFx(Bouncing_Balls_fx);
 					points += 100;
 					sensorpinkball3striggered = true;
 				}
 				if (bodyA == sensorpinkball4 || bodyB == sensorpinkball4) {
+					App->audio->PlayFx(Bouncing_Balls_fx);
 					points += 100;
 					sensorpinkball4striggered = true;
 				}
 				if (bodyA == sensorcanon1upper || bodyB == sensorcanon1upper) {
+					App->audio->PlayFx(Canon_Enter_fx);
 					sensorcanon1uppertriggered = true;
 				}
 				if (bodyA == sensorcanon1lower || bodyB == sensorcanon1lower) {
+					App->audio->PlayFx(Canon_Enter_fx);
 					sensorcanon1lowertriggered = true;
 				}
 				if (bodyA == sensorsound1 || bodyB == sensorsound1) {
-					soundtriggered = true;
+
 				}
 				if (bodyA == sensorsound2 || bodyB == sensorsound2) {
-					soundtriggered = true;
+
 				}
 			}
 		}

@@ -232,5 +232,4 @@ public:
 
 	PhysBody* sensorsound1;
 	PhysBody* sensorsound2;
-	bool soundtriggered = false;
 };
