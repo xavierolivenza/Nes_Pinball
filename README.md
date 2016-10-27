@@ -72,7 +72,7 @@ Lose ➣ Lose all your three lives.
 
 - In-game "godmode" with minisprings
 
-- Reboting balls
+- Bouncing pink balls
 
 - Points
 
