@@ -416,8 +416,8 @@ bool ModuleSceneIntro::Start()
 	paddlesR.add(App->physics->CreatePaddleR(180, 430, (146 * DEGTORAD), 78 * DEGTORAD));
 	paddlesR.add(App->physics->CreatePaddleR(180, 203, (146 * DEGTORAD), 78 * DEGTORAD));
 
-	bouncer = App->physics->CreateRectangle(226, 425, 1, 9, 0, b2_dynamicBody, 0);
-	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody, 0);
+	bouncer = App->physics->CreateRectangle(227, 425, 2, 9, 0, b2_dynamicBody, 0);
+	bouncerWheel = App->physics->CreateRectangle(227, 450, 10, 0, 0, b2_staticBody, 0);
 	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
 
 	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 0.5);
@@ -477,7 +477,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		uint animation_time = 500;
+		uint animation_time = 450;
 		springanimation = true;
 		if (realtime < currenttime + (animation_time / 4)) {
 			App->renderer->Blit(sprites, 220, 401, &springrect_1);
@@ -500,14 +500,9 @@ update_status ModuleSceneIntro::Update()
 	static float Push = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		if (Push <= 2000.0f)
-		{
-			Push += 40.0f;
-		}
 
-		else
-			Push += 0;
-		bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
+			Push += 40.0f;
+			bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
 	}
 	else
 		Push = 0.0f;
