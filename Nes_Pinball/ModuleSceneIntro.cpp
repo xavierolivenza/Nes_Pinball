@@ -1281,6 +1281,7 @@ update_status ModuleSceneIntro::Update()
 			App->physics->DeleteTemporaryJoint();
 			sensorcanon1upper->body->SetActive(false);
 			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(-15.0f, -16.5f), true);
+			App->audio->PlayFx(Start_fx);
 			first_joint_time = true;
 		}
 		if (realtime > canoncurrenttime + 1500) {
