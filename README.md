@@ -46,6 +46,47 @@ F1 ➣ Show colliders, sensors, joints,...
 Lose ➣ Lose all your three lives.
 
 
+# Things we implement from the original game
+
+- All map colisions
+
+- Paddles
+
+- Spring
+
+- Spring animation
+
+- Directional doors
+
+- UI
+
+- Moving platform
+
+- Animations for the penguins and the eggs
+
+- Cards
+
+- Change map color
+
+- In-game "godmode" with balls in the middle of the paddles
+
+- In-game "godmode" with minisprings
+
+- Reboting balls
+
+- Points
+
+- Number banners and door open
+
+- Cannon
+
+- Sounds
+
+- Coins
+
+- Extra points
+
+
 # Things we don't implement from the original game
 
 - Intro, end screens
