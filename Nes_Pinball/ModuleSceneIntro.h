@@ -217,6 +217,7 @@ public:
 
 	PhysBody* sensorcanon1upper;
 	PhysBody* sensorcanon1lower;
+	bool first_joint_time = false;
 	bool temp_joint_created = false;
 	bool sensorcanon1uppertriggered = false;
 	bool sensorcanon1lowertriggered = false;

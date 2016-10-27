@@ -1232,11 +1232,17 @@ update_status ModuleSceneIntro::Update()
 			App->physics->CreateTemporaryJoint();
 			temp_joint_created = true;
 		}
-		if (realtime > canoncurrenttime + 1000) {
+		if ((realtime > canoncurrenttime + 1000) && (first_joint_time == false)) {
 			App->physics->DeleteTemporaryJoint();
-			temp_joint_created = false;
-			sensorcanon1uppertriggered = false;
+			sensorcanon1upper->body->SetActive(false);
 			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(-15.0f, -16.5f), true);
+			first_joint_time = true;
+		}
+		if (realtime > canoncurrenttime + 1500) {
+			temp_joint_created = false;
+			sensorcanon1upper->body->SetActive(true);
+			sensorcanon1uppertriggered = false;
+			first_joint_time = false;
 		}
 	}
 	if (sensorcanon1lowertriggered == true) {
