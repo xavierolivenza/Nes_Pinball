@@ -54,7 +54,7 @@ bool ModuleSceneIntro::Start()
 	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6, 0);
 	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6, 0);
 	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6, 0);
-	sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24, 0);
+	//sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24, 0);
 
 	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4, 172);
 	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4, 0);
@@ -86,7 +86,6 @@ bool ModuleSceneIntro::Start()
 	sensorcoin8 = App->physics->CreateRectangleSensor(93, 43, 5, 5, 0);
 
 	directionalwall1 = App->physics->CreateRectangle(101, 37, 7, 21, 0, b2_staticBody, 0);
-	sensordirectionalwallin1 = App->physics->CreateRectangleSensor(95, 37, 2, 21, 0);
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
 	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody, 0);
@@ -101,6 +100,9 @@ bool ModuleSceneIntro::Start()
 	sensorextrapoints2 = App->physics->CreateRectangleSensor(90, 140, 2, 7, 0);
 	sensorextrapoints3 = App->physics->CreateRectangleSensor(90, 148, 2, 7, 0);
 	sensorextrapoints4 = App->physics->CreateRectangleSensor(90, 156, 2, 7, 0);
+
+	sensorsound1 = App->physics->CreateRectangleSensor(94, 394, 10, 4, 0);
+	sensorsound2 = App->physics->CreateRectangleSensor(194, 394, 10, 4, 0);
 
 	sensorreset = App->physics->CreateRectangleSensor(145, SCREEN_HEIGHT + 10, 50, 4, 0);
 
@@ -574,12 +576,13 @@ update_status ModuleSceneIntro::Update()
 		reset = true;
 	}
 
+	/*
 	if (sensorballpassedexittriggered == true) {
 		if (realtime > currenttimeexit + 1000) {
 			MapReset(false);
 		}
 	}
-
+	*/
 	if (numballs <= 0) {
 		game_over = true;
 	}
@@ -780,6 +783,12 @@ update_status ModuleSceneIntro::Update()
 	else {
 		App->renderer->Blit(sprites, 190, 295, &exitrect);
 		wall->body->SetActive(false);
+	}
+
+	//reset numbers
+	if (soundtriggered == true) {
+		MapReset(false);
+		soundtriggered = false;
 	}
 
 	//penguins
@@ -1098,6 +1107,12 @@ update_status ModuleSceneIntro::Update()
 		sensorpinkball3striggered = false;
 	}
 
+	//100 points spring
+	if (sensor100pointstriggered == true) {
+		circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(10, 10), true);
+		sensor100pointstriggered = false;
+	}
+
 	//draw ball, keep it at the bottom to draw the ball above all
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
@@ -1340,7 +1355,7 @@ void ModuleSceneIntro::MapReset(bool totalreset) {
 	sensor5triggeredpoints = false;
 	sensor6triggeredpoints = false;
 	sensor7triggeredpoints = false;
-	sensorballpassedexittriggered = false;
+	//sensorballpassedexittriggered = false;
 	wall->body->SetActive(true);
 }
 
@@ -1363,6 +1378,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensor100points || bodyB == sensor100points)
 				{
 					points += 100;
+					sensor100pointstriggered = true;
 				}
 				if (bodyA == sensor500points1 || bodyB == sensor500points1 ||
 					bodyA == sensor500points2 || bodyB == sensor500points2)
@@ -1408,11 +1424,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensor7triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
+				/*
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
 					currenttimeexit = realtime;
-					sensorballpassedexittriggered = true;
+					//sensorballpassedexittriggered = true;
 				}
+				*/
 				if (bodyA == sensorcard10 || bodyB == sensorcard10)
 				{
 					points += 500;
@@ -1498,11 +1516,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					points += 100;
 				}
 				if (bodyA == sensorcoin8 || bodyB == sensorcoin8) {
+					sensordirectionalwallin1triggered = true;
 					sensorcoin8triggered = true;
 					points += 100;
-				}
-				if (bodyA == sensordirectionalwallin1 || bodyB == sensordirectionalwallin1) {
-					sensordirectionalwallin1triggered = true;
 				}
 				if (bodyA == sensordirectionalwallout1 || bodyB == sensordirectionalwallout1) {
 					sensordirectionalwallout1triggered = true;
@@ -1557,6 +1573,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				}
 				if (bodyA == sensorcanon1lower || bodyB == sensorcanon1lower) {
 					sensorcanon1lowertriggered = true;
+				}
+				if (bodyA == sensorsound1 || bodyB == sensorsound1) {
+					soundtriggered = true;
+				}
+				if (bodyA == sensorsound2 || bodyB == sensorsound2) {
+					soundtriggered = true;
 				}
 			}
 		}

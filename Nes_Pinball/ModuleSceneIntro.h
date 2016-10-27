@@ -43,7 +43,7 @@ public:
 	PhysBody* sensor5;
 	PhysBody* sensor6;
 	PhysBody* sensor7;
-	PhysBody* sensorballpassedexit;
+	//PhysBody* sensorballpassedexit;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
@@ -59,13 +59,14 @@ public:
 	bool sensor5triggeredpoints = false;
 	bool sensor6triggeredpoints = false;
 	bool sensor7triggeredpoints = false;
-	bool sensorballpassedexittriggered = false;
+	//bool sensorballpassedexittriggered = false;
 
 	PhysBody* sensor100points;
 	PhysBody* sensor500points1;
 	PhysBody* sensor500points2;
 	PhysBody* sensor1000points;
 	PhysBody* sensorreset;
+	bool sensor100pointstriggered = false;
 
 	PhysBody* sensorcard10;
 	PhysBody* sensorcardJ;
@@ -105,7 +106,7 @@ public:
 
 	int realtime = 0;
 	int currenttime = 0;
-	int currenttimeexit = 0;
+	//int currenttimeexit = 0;
 	int currenttimepenguin = 0;
 	SDL_Rect springrect_1;
 	SDL_Rect springrect_2;
@@ -167,7 +168,6 @@ public:
 
 	SDL_Rect directionalwall1rect;
 	PhysBody* directionalwall1;
-	PhysBody* sensordirectionalwallin1;
 	PhysBody* sensordirectionalwallout1;
 	bool sensordirectionalwallin1triggered = false;
 	bool sensordirectionalwallout1triggered = false;
@@ -223,4 +223,7 @@ public:
 	bool sensorcanon1lowertriggered = false;
 	int canoncurrenttime = 0;
 
+	PhysBody* sensorsound1;
+	PhysBody* sensorsound2;
+	bool soundtriggered = false;
 };
