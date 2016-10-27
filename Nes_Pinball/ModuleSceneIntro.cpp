@@ -36,10 +36,6 @@ bool ModuleSceneIntro::Start()
 	//Test board
 	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
-	circle = App->textures->Load("pinball/wheel.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
 
@@ -158,7 +154,7 @@ bool ModuleSceneIntro::Start()
 		33, 382,
 		34, 381
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_1_Board_coords, 12, 1));
+	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_1_Board_coords, 12, 0.5));
 
 	int Pinball_MiniPart_2_Board_coords[16] = {
 		118, 382,
@@ -170,7 +166,7 @@ bool ModuleSceneIntro::Start()
 		117, 381,
 		118, 382
 	};
-	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_2_Board_coords, 14, 1));
+	board.add(App->physics->CreateChain(69, 0, Pinball_MiniPart_2_Board_coords, 14, 0.5));
 
 	int Pinball_Part_1_Board_coords[28] = {
 		37, 43,
@@ -411,7 +407,7 @@ bool ModuleSceneIntro::Start()
 	bouncerWheel = App->physics->CreateRectangle(225, 450, 10, 0, 0, b2_staticBody, 0);
 	App->physics->CreateLineJoint(bouncer->body, bouncerWheel->body, p2Point<float>(0, 0), p2Point<float>(0, 0), 30.0f, 0.0f);
 
-	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 1);
+	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 0.5);
 	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
 
 	pinkballs1 = App->physics->CreateCircleSensor(144, 100, 11, b2_staticBody, 25, 1);
