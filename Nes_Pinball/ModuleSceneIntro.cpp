@@ -1239,8 +1239,13 @@ update_status ModuleSceneIntro::Update()
 			circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(-15.0f, -16.5f), true);
 		}
 	}
-
-	//bool sensorcanon1lowertriggered = false;
+	if (sensorcanon1lowertriggered == true) {
+		b2Vec2 CanonPos;
+		CanonPos.x = 4.16;
+		CanonPos.y = 3.59;
+		circles.getLast()->data->body->SetTransform(CanonPos, 0);
+		sensorcanon1lowertriggered = false;
+	}
 
 	App->window->SetTitle("Nes Pinball (C++, SDL2.0, Box2D)");
 
