@@ -18,7 +18,7 @@ ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app,
 	world = NULL;
 	mouse_joint = NULL;
 	//debug = false;
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -188,6 +188,7 @@ PhysBody* ModulePhysics::CreatePaddleL(int x, int y, float angd, float angu)
 		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
 	}
 	shape2.Set(p, 8);
+	delete p;
 
 	//shape2.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(4) * 0.5f);
 	b2FixtureDef fixture2;
@@ -294,6 +295,7 @@ PhysBody* ModulePhysics::CreatePaddleR(int x, int y, float angd, float angu)
 		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
 	}
 	shape2.Set(p, 7);
+	delete p;
 
 	//shape2.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(4) * 0.5f);
 	b2FixtureDef fixture2;
