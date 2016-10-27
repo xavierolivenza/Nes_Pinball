@@ -43,7 +43,7 @@ public:
 	PhysBody* sensor5;
 	PhysBody* sensor6;
 	PhysBody* sensor7;
-	//PhysBody* sensorballpassedexit;
+	PhysBody* sensorballpassedexit;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
@@ -59,7 +59,7 @@ public:
 	bool sensor5triggeredpoints = false;
 	bool sensor6triggeredpoints = false;
 	bool sensor7triggeredpoints = false;
-	//bool sensorballpassedexittriggered = false;
+	bool sensorballpassedexittriggered = false;
 
 	PhysBody* sensor100points;
 	PhysBody* sensor500points1;
@@ -106,7 +106,7 @@ public:
 
 	int realtime = 0;
 	int currenttime = 0;
-	//int currenttimeexit = 0;
+	int currenttimeexit = 0;
 	int currenttimepenguin = 0;
 	SDL_Rect springrect_1;
 	SDL_Rect springrect_2;

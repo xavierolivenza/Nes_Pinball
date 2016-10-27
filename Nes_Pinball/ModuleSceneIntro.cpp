@@ -54,7 +54,7 @@ bool ModuleSceneIntro::Start()
 	sensor5 = App->physics->CreateRectangleSensor(82, 328, 2, 6, 0);
 	sensor6 = App->physics->CreateRectangleSensor(82, 336, 2, 6, 0);
 	sensor7 = App->physics->CreateRectangleSensor(82, 344, 2, 6, 0);
-	//sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24, 0);
+	sensorballpassedexit = App->physics->CreateRectangleSensor(217, 305, 2, 24, 0);
 
 	sensor100points = App->physics->CreateRectangleSensor(114, 80, 12, 4, 172);
 	sensor500points1 = App->physics->CreateRectangleSensor(160, 60, 12, 4, 0);
@@ -576,13 +576,12 @@ update_status ModuleSceneIntro::Update()
 		reset = true;
 	}
 
-	/*
 	if (sensorballpassedexittriggered == true) {
 		if (realtime > currenttimeexit + 1000) {
 			MapReset(false);
 		}
 	}
-	*/
+
 	if (numballs <= 0) {
 		game_over = true;
 	}
@@ -783,12 +782,6 @@ update_status ModuleSceneIntro::Update()
 	else {
 		App->renderer->Blit(sprites, 190, 295, &exitrect);
 		wall->body->SetActive(false);
-	}
-
-	//reset numbers
-	if (soundtriggered == true) {
-		MapReset(false);
-		soundtriggered = false;
 	}
 
 	//penguins
@@ -1355,7 +1348,7 @@ void ModuleSceneIntro::MapReset(bool totalreset) {
 	sensor5triggeredpoints = false;
 	sensor6triggeredpoints = false;
 	sensor7triggeredpoints = false;
-	//sensorballpassedexittriggered = false;
+	sensorballpassedexittriggered = false;
 	wall->body->SetActive(true);
 }
 
@@ -1424,13 +1417,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 					sensor7triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
 				}
-				/*
 				if (bodyA == sensorballpassedexit || bodyB == sensorballpassedexit)
 				{
 					currenttimeexit = realtime;
-					//sensorballpassedexittriggered = true;
+					sensorballpassedexittriggered = true;
 				}
-				*/
 				if (bodyA == sensorcard10 || bodyB == sensorcard10)
 				{
 					points += 500;
