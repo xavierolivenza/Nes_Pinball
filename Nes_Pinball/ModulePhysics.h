@@ -65,6 +65,9 @@ public:
 	void PaddleMoveR();
 	void PaddleStopR();
 
+	void CreateTemporaryJoint();
+	void DeleteTemporaryJoint();
+
 private:
 
 	bool debug;
@@ -78,4 +81,6 @@ private:
 
 	p2List<b2RevoluteJoint*> paddleList;
 	p2List<b2RevoluteJoint*> paddleListR;
+
+	b2RevoluteJoint* temp_rev_joint;
 };

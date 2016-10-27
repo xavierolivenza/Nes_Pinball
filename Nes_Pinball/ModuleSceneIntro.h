@@ -19,6 +19,8 @@ public:
 
 public:
 
+	void MapReset(bool totalreset);
+
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
@@ -212,5 +214,12 @@ public:
 	bool sensorpinkball2striggered = false;
 	bool sensorpinkball3striggered = false;
 	bool sensorpinkball4striggered = false;
+
+	PhysBody* sensorcanon1upper;
+	PhysBody* sensorcanon1lower;
+	bool temp_joint_created = false;
+	bool sensorcanon1uppertriggered = false;
+	bool sensorcanon1lowertriggered = false;
+	int canoncurrenttime = 0;
 
 };

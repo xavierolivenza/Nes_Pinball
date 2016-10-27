@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
+#include "ModuleSceneIntro.h"
 #include "p2Point.h"
 #include "math.h"
 
@@ -775,6 +776,23 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	}
 
 	return ret;
+}
+
+void ModulePhysics::CreateTemporaryJoint()
+{
+	b2RevoluteJointDef temp_joint_def;
+	temp_joint_def.bodyA = App->scene_intro->circles.getLast()->data->body;
+	temp_joint_def.bodyB = App->scene_intro->sensorcanon1upper->body;
+	temp_joint_def.collideConnected = false;
+	temp_joint_def.localAnchorA.Set(0, 0);
+	temp_joint_def.localAnchorB.Set(0, 0);
+	temp_rev_joint = (b2RevoluteJoint*)world->CreateJoint(&temp_joint_def);
+}
+
+void ModulePhysics::DeleteTemporaryJoint()
+{
+	world->DestroyJoint(temp_rev_joint);
+	temp_rev_joint = nullptr;
 }
 
 void ModulePhysics::BeginContact(b2Contact* contact)
