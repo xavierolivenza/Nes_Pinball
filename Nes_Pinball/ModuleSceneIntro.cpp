@@ -36,8 +36,14 @@ bool ModuleSceneIntro::Start()
 	//Test board
 	//main_board = App->textures->Load("pinball/Pinball_Board_with_score_clean.png");
 	
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	paddle_fx = App->audio->LoadFx("pinball/paddle.wav");
+	Bouncing_Balls_fx = App->audio->LoadFx("pinball/Bouncing_Balls.wav");
+	Canon_Enter_fx = App->audio->LoadFx("pinball/Canon_Enter.wav");
+	Card_fx = App->audio->LoadFx("pinball/Card.wav");
+	Chicken_Platform_fx = App->audio->LoadFx("pinball/Chicken_Platform.wav");
+	Coins_Tickets_ToDoor_fx = App->audio->LoadFx("pinball/Coins_Tickets_ToDoor.wav");
+	Save_Spring_fx = App->audio->LoadFx("pinball/Save_Spring.wav");
+	Start_fx = App->audio->LoadFx("pinball/Start.wav");
 
 	wall = App->physics->CreateRectangle(214, 305, 9, 24, 0, b2_staticBody, 0);
 

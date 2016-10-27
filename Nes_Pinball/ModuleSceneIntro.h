@@ -99,8 +99,15 @@ public:
 	SDL_Texture* game_over_tex;
 	bool game_over = false;
 
-	uint bonus_fx;
 	uint paddle_fx;
+	uint Bouncing_Balls_fx;
+	uint Canon_Enter_fx;
+	uint Card_fx;
+	uint Chicken_Platform_fx;
+	uint Coins_Tickets_ToDoor_fx;
+	uint Save_Spring_fx;
+	uint Start_fx;
+
 	p2Point<int> ray;
 	bool ray_on;
 
