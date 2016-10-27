@@ -393,6 +393,11 @@ bool ModuleSceneIntro::Start()
 	extracoinsrect.h = 7;
 	extracoinsrect.w = 2;
 
+	pinkball_big.h = 24;
+	pinkball_big.w = 22;
+	pinkball_small.h = 18;
+	pinkball_small.w = 16;
+
 	//Create initial ball
 	circles.add(App->physics->CreateCircle(225, 390, 5.5, b2_dynamicBody, 0));
 	circles.getFirst()->data->body->SetBullet(true);
@@ -410,13 +415,13 @@ bool ModuleSceneIntro::Start()
 	kincreate = App->physics->CreateRectangle(120, 140, 14, 5, 0, b2_kinematicBody, 0.5);
 	kincreate->body->SetLinearVelocity(b2Vec2(1, 0));
 
-	pinkballs1 = App->physics->CreateCircleSensor(144, 100, 11, b2_staticBody, 25, 1);
+	sensorpinkball1 = App->physics->CreateCircleSensor(144, 100, 11, b2_staticBody, 25, 1);
 	pinkball1 = App->physics->CreateCircle(144, 100, 9, b2_staticBody, 1);
-	pinkballs2 = App->physics->CreateCircleSensor(121, 321, 11, b2_staticBody, 25, 1);
+	sensorpinkball2 = App->physics->CreateCircleSensor(121, 321, 11, b2_staticBody, 25, 1);
 	pinkball2 = App->physics->CreateCircle(121, 321, 9, b2_staticBody, 1);
-	pinkballs3 = App->physics->CreateCircleSensor(144, 353, 11, b2_staticBody, 25, 1);
+	sensorpinkball3 = App->physics->CreateCircleSensor(144, 353, 11, b2_staticBody, 25, 1);
 	pinkball3 = App->physics->CreateCircle(144, 353, 9, b2_staticBody, 1);
-	pinkballs4 = App->physics->CreateCircleSensor(169, 321, 11, b2_staticBody, 25, 1);
+	sensorpinkball4 = App->physics->CreateCircleSensor(169, 321, 11, b2_staticBody, 25, 1);
 	pinkball4 = App->physics->CreateCircle(169, 321, 9, b2_staticBody, 1);
 
 	return ret;
@@ -1115,6 +1120,56 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	//pink balls
+	int i, j = 0;
+	pinkball_big.x = 102;
+	pinkball_big.y = 178;
+	pinkball_small.x = 127;
+	pinkball_small.y = 184;
+
+	if (sensorpinkball1striggered == false) {
+		sensorpinkball1->GetPosition(i, j);
+		App->renderer->Blit(sprites, i, j, &pinkball_big);
+	}
+	else {
+		pinkball1->GetPosition(i, j);
+		App->renderer->Blit(sprites, i + 1, j, &pinkball_small);
+		sensorpinkball1striggered = false;
+	}
+
+	if (sensorpinkball2striggered == false) {
+		sensorpinkball2->GetPosition(i, j);
+		App->renderer->Blit(sprites, i, j, &pinkball_big);
+	}
+	else {
+		pinkball2->GetPosition(i, j);
+		App->renderer->Blit(sprites, i + 1, j, &pinkball_small);
+		sensorpinkball2striggered = false;
+	}
+
+	if (sensorpinkball4striggered == false) {
+		sensorpinkball4->GetPosition(i, j);
+		App->renderer->Blit(sprites, i, j, &pinkball_big);
+	}
+	else {
+		pinkball4->GetPosition(i, j);
+		App->renderer->Blit(sprites, i + 1, j, &pinkball_small);
+		sensorpinkball4striggered = false;
+	}
+
+	pinkball_big.x = 58;
+	pinkball_small.x = 83;
+
+	if (sensorpinkball3striggered == false) {
+		sensorpinkball3->GetPosition(i, j);
+		App->renderer->Blit(sprites, i, j, &pinkball_big);
+	}
+	else {
+		pinkball3->GetPosition(i, j);
+		App->renderer->Blit(sprites, i + 1, j, &pinkball_small);
+		sensorpinkball3striggered = false;
+	}
+
 	//draw ball, keep it at the bottom to draw the ball above all
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
@@ -1458,6 +1513,22 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				if (bodyA == sensorextrapoints4 || bodyB == sensorextrapoints4) {
 					sensorextrapoints4triggered = true;
 					circles.getLast()->data->body->ApplyForceToCenter(b2Vec2(3, 0), true);
+				}
+				if (bodyA == sensorpinkball1 || bodyB == sensorpinkball1) {
+					points += 100;
+					sensorpinkball1striggered = true;
+				}
+				if (bodyA == sensorpinkball2 || bodyB == sensorpinkball2) {
+					points += 100;
+					sensorpinkball2striggered = true;
+				}
+				if (bodyA == sensorpinkball3 || bodyB == sensorpinkball3) {
+					points += 100;
+					sensorpinkball3striggered = true;
+				}
+				if (bodyA == sensorpinkball4 || bodyB == sensorpinkball4) {
+					points += 100;
+					sensorpinkball4striggered = true;
 				}
 			}
 		}

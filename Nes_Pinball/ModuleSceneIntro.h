@@ -31,10 +31,6 @@ public:
 	PhysBody* bouncer;
 	PhysBody* bouncerWheel;
 	PhysBody* kincreate;
-	PhysBody* pinkball1;
-	PhysBody* pinkball2;
-	PhysBody* pinkball3;
-	PhysBody* pinkball4;
 
 	bool springanimation = false;
 
@@ -46,10 +42,6 @@ public:
 	PhysBody* sensor6;
 	PhysBody* sensor7;
 	PhysBody* sensorballpassedexit;
-	PhysBody* pinkballs1;
-	PhysBody* pinkballs2;
-	PhysBody* pinkballs3;
-	PhysBody* pinkballs4;
 
 	bool sensor1triggered = false;
 	bool sensor2triggered = false;
@@ -205,5 +197,20 @@ public:
 	bool sensorextrapoints2triggeredpoints = false;
 	bool sensorextrapoints3triggeredpoints = false;
 	bool sensorextrapoints4triggeredpoints = false;
+
+	PhysBody* pinkball1;
+	PhysBody* pinkball2;
+	PhysBody* pinkball3;
+	PhysBody* pinkball4;
+	PhysBody* sensorpinkball1;
+	PhysBody* sensorpinkball2;
+	PhysBody* sensorpinkball3;
+	PhysBody* sensorpinkball4;
+	SDL_Rect pinkball_big;
+	SDL_Rect pinkball_small;
+	bool sensorpinkball1striggered = false;
+	bool sensorpinkball2striggered = false;
+	bool sensorpinkball3striggered = false;
+	bool sensorpinkball4striggered = false;
 
 };
