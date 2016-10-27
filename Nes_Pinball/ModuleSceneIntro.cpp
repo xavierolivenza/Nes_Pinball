@@ -90,7 +90,7 @@ bool ModuleSceneIntro::Start()
 	sensordirectionalwallout1 = App->physics->CreateRectangleSensor(109, 35, 2, 21, 0);
 
 	directionalwall2 = App->physics->CreateRectangle(197, 34, 7, 21, 0, b2_staticBody, 0);
-	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(225, 75, 10, 2, 0);
+	sensordirectionalwallin2 = App->physics->CreateRectangleSensor(225, 140, 10, 10, 0);
 	sensordirectionalwallout2 = App->physics->CreateRectangleSensor(188, 34, 2, 21, 0);
 
 	directionalwall3 = App->physics->CreateRectangle(203, 133, 5, 18, 150, b2_staticBody, 0);
@@ -484,7 +484,13 @@ update_status ModuleSceneIntro::Update()
 	static float Push = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		Push += 40.0f;
+		if (Push <= 2000.0f)
+		{
+			Push += 40.0f;
+		}
+
+		else
+			Push += 0;
 		bouncer->body->ApplyForceToCenter(b2Vec2(0, (Push)), true);
 	}
 	else
