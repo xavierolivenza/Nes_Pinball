@@ -60,6 +60,8 @@ Lose ➣ Lose all your three lives.
 
 - Special level
 
+- Ball animations at start and in the canons
+
 - When you enter the tunnel near the green part, the numbers over the penguins appear, 
 rolling between 3 and 7, if you hit the pink board with a hit to the ball from the paddles, 
 you can stop each number, and get a bonus
